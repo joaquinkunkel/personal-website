@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import Link from 'next/link';
-import { useState, useRef, Children, useLayoutEffect } from 'react';
+import { useState, useRef, Children, useLayoutEffect, useEffect } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import useWindowSize from '@rooks/use-window-size';
 import useScrollPosition from '@react-hook/window-scroll';
@@ -196,32 +196,16 @@ const Places = () => {
 
   const [widths, setWidths] = useState({abuDhabi: 0, sanFrancisco: 0});
   const [containerWidth, setContainerWidth] = useState(0)
-  const { innerWidth } = useWindowSize();
+  // const { innerWidth } = useWindowSize();
   const [date, setDate] = useState(new Date());
 
-  useLayoutEffect(() => {
-    if (abuDhabiRef.current && sanFranciscoRef.current) {
-      setWidths({
-        abuDhabi: abuDhabiRef.current.offsetWidth,
-        sanFrancisco: sanFranciscoRef.current.offsetWidth,
-        mexicoCity: mexicoCityRef.current.offsetWidth,
-      });
-    }
-    if (containerRef.current) {
-      setContainerWidth(containerRef.current.offsetWidth);
-    }
+
+  useEffect(() => {
     const timer = setInterval(() => setDate(new Date()), 1000)
     return () => {
       clearInterval(timer);
     };
-
   }, [])
-
-  useLayoutEffect(() => {
-    if (containerRef.current) {
-      setContainerWidth(containerRef.current.offsetWidth);
-    }
-  }, [innerWidth]);
 
   const arrowWidth = (containerWidth - widths.abuDhabi - widths.sanFrancisco - widths.mexicoCity) / 2;
 
