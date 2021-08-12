@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Link from 'next/link';
 import { useState, useRef, Children, useLayoutEffect } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import useWindowSize from '@rooks/use-window-size';
@@ -6,6 +7,7 @@ import useScrollPosition from '@react-hook/window-scroll';
 import { AppBar, Box, Button, Divider, Grid, Paper, Tab, Tabs, Typography, Container, useMediaQuery } from '@material-ui/core';
 import { ThemeProvider } from '@material-ui/core/styles';
 import theme from '../src/theme';
+import './styles.css';
 
 
 const email = () => {
@@ -19,6 +21,44 @@ const Home = () => {
 
   return (
     <>
+      <Head key={0}>
+        <link
+          rel="preload"
+          href="/fonts/ObjectSans-Heavy.ttf"
+          as="font"
+          crossOrigin=""
+        />
+        <link
+          rel="preload"
+          href="/fonts/ObjectSans-Bold.ttf"
+          as="font"
+          crossOrigin=""
+        />
+        <link
+          rel="preload"
+          href="/fonts/ObjectSans-Regular.ttf"
+          as="font"
+          crossOrigin=""
+        />
+        <link
+          rel="preload"
+          href="/fonts/Cirka-Bold.ttf"
+          as="font"
+          crossOrigin=""
+        />
+        <link
+          rel="preload"
+          href="/fonts/Cirka-Light.ttf"
+          as="font"
+          crossOrigin=""
+        />
+        <link
+          rel="preload"
+          href="/fonts/Cirka-Regular.ttf"
+          as="font"
+          crossOrigin=""
+        />
+      </Head>
       <CssBaseline>      
         <ThemeProvider theme={theme}>
           <Container>
@@ -210,7 +250,7 @@ const Place = ({text, innerRef, strikeThrough, highlight, date}) => (
     }}
   >
     <Typography
-      variant="h6"
+      variant="subtitle1"
       color={highlight && 'textSecondary'}
       noWrap
       style={{textDecoration: strikeThrough && 'line-through'}}
