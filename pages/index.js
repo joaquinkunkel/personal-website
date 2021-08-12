@@ -11,8 +11,7 @@ import './styles.css';
 
 
 const email = () => {
-  // TODO
-  // open a new email to j@joaquin.world
+  window.location.href = "mailto:j@joaquin.world";
 };
 
 const Home = () => {
