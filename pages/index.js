@@ -62,8 +62,6 @@ const Home = () => {
             <Grid container spacing={5}>
               <Block>
                 <Hero /> {/* Welcome to the world... */}
-              </Block>
-              <Block>
                 <ValueProp /> {/* I empower... */}
               </Block>
               <Block>
@@ -98,16 +96,18 @@ const Hero = () => (
       variant="h3"
       style={{color: 'rgba(25, 54, 34, 0.6)'}}
     >
-    <span>
+    {/* <span>
       Welcome to the world of<br/>
-    </span>
+    </span> */}
     <span
       style={{color: theme.palette.text.secondary}}
     >
       Joaquin Kunkel
     </span>
     <span>
-      ,<br/>product designer with an engineering background.
+      {/* , */}
+      <br/>Product designer with an engineering background
+      {/* . */}
     </span>
     {/* <Typography variant="h3" style={{color: 'rgba(25, 54, 34, 0.2)'}}>
       I'm also a visual artist.
