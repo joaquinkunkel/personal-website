@@ -31,6 +31,9 @@ const theme = createTheme({
         color: '#246636',
       },
       fontFamily: sansSerif,
+      h6: {
+        fontFamily: sansSerif,
+      },
       h3: {
         fontWeight: 700,
         fontSize: 60,
@@ -44,7 +47,6 @@ const theme = createTheme({
       },
       body2: {
         fontFamily: serif,
-        fontWeight: 600,
       },
       subtitle1: {
         fontSize: 14,

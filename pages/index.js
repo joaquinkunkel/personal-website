@@ -210,7 +210,7 @@ const Place = ({text, innerRef, strikeThrough, highlight, date}) => (
     }}
   >
     <Typography
-      variant="subtitle1"
+      variant="h6"
       color={highlight && 'textSecondary'}
       noWrap
       style={{textDecoration: strikeThrough && 'line-through'}}
