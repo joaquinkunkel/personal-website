@@ -7,8 +7,6 @@ import useScrollPosition from '@react-hook/window-scroll';
 import { AppBar, Box, Button, Divider, Grid, Paper, Tab, Tabs, Typography, Container, useMediaQuery } from '@material-ui/core';
 import { ThemeProvider } from '@material-ui/core/styles';
 import theme from '../src/theme';
-import './styles.css';
-
 
 const email = () => {
   window.location.href = "mailto:j@joaquin.world";
