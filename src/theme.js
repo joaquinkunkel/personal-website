@@ -5,7 +5,7 @@ const serif = ['Cirka', 'ObjectSans', 'sans-serif'].join(',');
 
 const theme = createTheme({
     palette: {
-      type: 'dark',
+      type: 'light',
       text: {
         primary: '#246636',
         secondary: '#DB2768',
@@ -18,7 +18,7 @@ const theme = createTheme({
         main: '#DB2768',
       },
       background: {
-        default: 'black',
+        // default: '#000',
         paper: 'rgba(219, 39, 104, 0.1)',
       },
     },

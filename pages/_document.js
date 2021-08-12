@@ -1,22 +1,21 @@
-/* eslint-disable react/jsx-filename-extension */
 import React from 'react';
-import Document, {
-  Html, Main, NextScript,
-} from 'next/document';
+import Document, { Html, Head, Main, NextScript } from 'next/document'
 import { ServerStyleSheets } from '@material-ui/core/styles';
 
 export default class MyDocument extends Document {
   render() {
     return (
-      <Html lang="en">
+      <Html>
+        <Head />
         <body>
           <Main />
           <NextScript />
         </body>
       </Html>
-    );
+    )
   }
 }
+
 
 // `getInitialProps` belongs to `_document` (instead of `_app`),
 // it's compatible with server-side generation (SSG).
