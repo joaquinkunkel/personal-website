@@ -106,7 +106,7 @@ const Hero = () => (
     </span>
     <span>
       {/* , */}
-      <br/>Product designer with an engineering background
+      <br/>Product designer with an<br/>engineering background
       {/* . */}
     </span>
     {/* <Typography variant="h3" style={{color: 'rgba(25, 54, 34, 0.2)'}}>
