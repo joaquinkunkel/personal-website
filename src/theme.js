@@ -9,7 +9,7 @@ export const lightTheme = createTheme({
       text: {
         primary: '#246636',
         secondary: '#DB2768',
-        disabled: 'rgba(25, 54, 34, 0.5)',
+        disabled: 'rgba(25, 54, 34, 0.55)',
       },
       primary: {
         main: '#246636',
