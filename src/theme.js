@@ -3,7 +3,7 @@ import { createTheme, responsiveFontSizes } from '@material-ui/core/styles';
 const sansSerif = ['ObjectSans', 'system-ui', 'sans-serif'].join(',');
 const serif = ['Cirka', 'ObjectSans', 'sans-serif'].join(',');
 
-export const lightTheme = createTheme({
+export const lightTheme = responsiveFontSizes(createTheme({
     palette: {
       type: 'light',
       text: {
@@ -77,9 +77,9 @@ export const lightTheme = createTheme({
         color: 'textPrimary',
       },
     },
-});
+}));
 
-export const darkTheme = createTheme({
+export const darkTheme = responsiveFontSizes(createTheme({
   palette: {
     type: 'dark',
     text: {
@@ -150,6 +150,6 @@ export const darkTheme = createTheme({
       color: 'textPrimary',
     },
   },
-});
+}));
 
 export default lightTheme;

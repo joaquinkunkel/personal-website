@@ -5,7 +5,6 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import { useMediaQuery } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import lightTheme, { darkTheme } from '../src/theme';
-import useDarkMode from 'use-dark-mode';
 import './styles.css'
 
 
