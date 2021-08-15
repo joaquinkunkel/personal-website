@@ -17,6 +17,7 @@ const Home = () => {
   const scrollY = useScrollPosition(60);
   const showNav = scrollY > 200;
   const darkMode = useMediaQuery('(prefers-color-scheme: dark)');
+  const isSmall = useMediaQuery('(max-width: 600px)');
 
   return (
     <>
@@ -57,64 +58,76 @@ const Home = () => {
           as="font"
           crossOrigin=""
         />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
       </Head>
-          <Container>
-            <Grid container spacing={5}>
-              <Block>
-                <Hero /> {/* Welcome to the world... */}
-                <ValueProp /> {/* I empower... */}
-              </Block>
-              <Block>
-                <Callout
-                  icon={<EmailIcon />}
-                  content={<EmailButton />}
-                  caption="Let’s chat about design, eng, music, art, or life."
-                />
-              </Block>
+      <Container maxWidth="md">
+        <Grid container spacing={5} style={{paddingTop: 40}}>
+          {
+            !isSmall
+            && (
               <Block>
                 <Callout
                   icon={<WorldIcon />}
-                  content={<Places />}
-                  // caption="I grew up in Mexico City. I've been around, but I'm based here for now. I'm open to working anywhere, but have a keen eye on New York right now."
-                  // rightAlign
+                  content={
+                    <Places orientation="horizontal" />
+                  }
                 />
               </Block>
-            </Grid>
-          </Container>
+            )
+          }
+          <Block>
+            <Hero /> {/* Welcome to the world... */}
+            <ValueProp /> {/* I empower... */}
+          </Block>
+          <Block>
+            <Callout
+              icon={<EmailIcon />}
+              content={<EmailButton />}
+              caption="Let’s chat about design, eng, music, art, or life."
+            />
+          </Block>
+          {
+            isSmall
+            && (
+              <Block>
+                <Callout
+                  icon={<WorldIcon />}
+                  content={
+                    <Places orientation="vertical" />
+                  }
+                />
+              </Block>
+            )
+          }
+        </Grid>
+      </Container>
     </>
   );
 }
 
 const Hero = withTheme(({theme}) => (
-  <Box style={{paddingTop: '10vh'}}>
+  <Box>
+    <Typography
+      variant="h3"
+      style={{color: theme.palette.text.secondary}}
+    >
+      Joaquin Kunkel
+    </Typography>
     <Typography
       variant="h3"
       style={{color: theme.palette.text.disabled}}
     >
-    {/* <span>
-      Welcome to the world of<br/>
-    </span> */}
-    <span
-      style={{color: theme.palette.text.secondary}}
-    >
-      Joaquin Kunkel
-    </span>
-    <span>
-      {/* , */}
-      <br/>Product designer with an<br/>engineering background
-      {/* . */}
-    </span>
-    {/* <Typography variant="h3" style={{color: 'rgba(25, 54, 34, 0.2)'}}>
-      I'm also a visual artist.
-    </Typography> */}
+      Product designer with an engineering background
     </Typography>
   </Box>
 ));
 
 const ValueProp = () => (
-  <Box style={{maxWidth: 600}}>
-    <Typography variant="h6">
-      I write code, connect stakeholders, and empower people to ask
+  <Box maxWidth={'500px'}>
+    <Typography variant="body1">
+      I write code, connect stakeholders, and empower teams to ask
       the right questions in order to deliver products with high impact and elevated craft.
     </Typography>
   </Box>
@@ -182,18 +195,14 @@ const EmailButton = () => (
 );
 
 // Visualization of movings around
-const Places = () => {
+const Places = ({orientation}) => {
   const containerRef = useRef(null);
 
   const abuDhabiRef = useRef(null);
   const sanFranciscoRef = useRef(null);
   const mexicoCityRef = useRef(null);
 
-  const [widths, setWidths] = useState({abuDhabi: 0, sanFrancisco: 0});
-  const [containerWidth, setContainerWidth] = useState(0)
-  // const { innerWidth } = useWindowSize();
   const [date, setDate] = useState(new Date());
-
 
   useEffect(() => {
     const timer = setInterval(() => setDate(new Date()), 1000)
@@ -202,32 +211,68 @@ const Places = () => {
     };
   }, [])
 
-  const arrowWidth = (containerWidth - widths.abuDhabi - widths.sanFrancisco - widths.mexicoCity) / 2;
-
   return (
     <div
       ref={containerRef}
-      style={{display: 'flex', alignItems: 'flex-start', width: '100%'}}
+      style={{display: 'flex', alignItems: 'flex-start', width: '100%', flexDirection: orientation === 'vertical' ? 'column' : 'row'}}
     >
-      <Place innerRef={abuDhabiRef} text="Abu Dhabi" />
-      <Box padding={1}>
-        <Arrow width={arrowWidth} />
+      <Place
+        text="Abu Dhabi"
+        subtitle={
+          <Typography variant="body2" color="textPrimary">
+            2015 - 2019
+          </Typography>
+        }
+      />
+      <Box
+        padding={orientation === 'horizontal' && 1}
+        
+      >
+        <Arrow orientation={orientation} />
       </Box>
-      <Place innerRef={sanFranciscoRef} text="San Francisco" />
-      <Box padding={1}>
-        <Arrow width={arrowWidth} />
+      <Place
+        text="San Francisco"
+        subtitle={
+          <Typography variant="body2" color="textPrimary">
+            2019 - 2020
+          </Typography>
+        }
+      />
+      <Box padding={orientation === 'horizontal' && 1}>
+        <Arrow orientation={orientation} />
       </Box>
-      <Place innerRef={mexicoCityRef} text="Mexico City" highlight date={date} />
+      <Place
+        text="Mexico City"
+        subtitle={
+          <>
+            <Typography
+              variant="body2"
+              color="textSecondary"
+            >
+              {date.toDateString()}
+            </Typography>
+            <Typography
+              variant="body2"
+              color="textSecondary"
+            >
+              {date.toLocaleTimeString().substring(0, date.toLocaleTimeString().length - 6)} {date.toLocaleTimeString().substring(date.toLocaleTimeString().length - 2, date.toLocaleTimeString().length)}
+            </Typography>
+          </>
+        }
+        highlight
+      />
     </div>
   );
 };
 
-const Place = ({text, innerRef, strikeThrough, highlight, date}) => (
+Places.defaultProps = {
+  orientation: 'horizontal',
+};
+
+const Place = ({text, innerRef, strikeThrough, highlight, subtitle}) => (
   <Box
     ref={innerRef}
-    style={{
-      padding: 8,
-    }}
+    paddingY={1}
   >
     <Typography
       variant="subtitle1"
@@ -238,23 +283,7 @@ const Place = ({text, innerRef, strikeThrough, highlight, date}) => (
       {text}
     </Typography>
     {
-      highlight && date
-      && (
-        <>
-          <Typography
-            variant="body2"
-            color="textSecondary"
-          >
-            {date.toDateString()}
-          </Typography>
-          <Typography
-            variant="body2"
-            color="textSecondary"
-          >
-            {date.toLocaleTimeString().substring(0, date.toLocaleTimeString().length - 6)} {date.toLocaleTimeString().substring(date.toLocaleTimeString().length - 2, date.toLocaleTimeString().length)}
-          </Typography>
-        </>
-      )
+      subtitle
     }
   </Box>
 );
@@ -285,13 +314,20 @@ const WorldIcon = withTheme(({theme}) => {
   );
 });
 
-const Arrow = withTheme(({theme}) => {
+const Arrow = withTheme(({theme, orientation}) => {
   const color = theme.palette.text.primary;
   return (
-<svg width="41" height="9" viewBox="0 0 41 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M40.3536 5.35355C40.5488 5.15829 40.5488 4.84171 40.3536 4.64645L37.1716 1.46447C36.9763 1.2692 36.6597 1.2692 36.4645 1.46447C36.2692 1.65973 36.2692 1.97631 36.4645 2.17157L39.2929 5L36.4645 7.82843C36.2692 8.02369 36.2692 8.34027 36.4645 8.53553C36.6597 8.7308 36.9763 8.7308 37.1716 8.53553L40.3536 5.35355ZM0 5.5H40V4.5H0V5.5Z" fill={color}/>
-</svg>
-
+    orientation === 'horizontal'
+    ? (      
+      <svg width="41" height="9" viewBox="0 0 41 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M40.3536 5.35355C40.5488 5.15829 40.5488 4.84171 40.3536 4.64645L37.1716 1.46447C36.9763 1.2692 36.6597 1.2692 36.4645 1.46447C36.2692 1.65973 36.2692 1.97631 36.4645 2.17157L39.2929 5L36.4645 7.82843C36.2692 8.02369 36.2692 8.34027 36.4645 8.53553C36.6597 8.7308 36.9763 8.7308 37.1716 8.53553L40.3536 5.35355ZM0 5.5H40V4.5H0V5.5Z" fill={color} />
+      </svg>
+    )
+    : (
+      <svg width="10" height="21" viewBox="0 0 10 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M5.35355 20.8536C5.15829 21.0488 4.84171 21.0488 4.64644 20.8536L1.46446 17.6716C1.2692 17.4763 1.2692 17.1597 1.46446 16.9645C1.65973 16.7692 1.97631 16.7692 2.17157 16.9645L5 19.7929L7.82842 16.9645C8.02369 16.7692 8.34027 16.7692 8.53553 16.9645C8.73079 17.1597 8.73079 17.4763 8.53553 17.6716L5.35355 20.8536ZM5.5 0.5L5.5 20.5L4.5 20.5L4.5 0.5L5.5 0.5Z" fill={color} />
+      </svg>
+    )
   );
 });
 

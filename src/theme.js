@@ -1,7 +1,7 @@
 import { createTheme, responsiveFontSizes } from '@material-ui/core/styles';
 
 const sansSerif = ['ObjectSans', 'system-ui', 'sans-serif'].join(',');
-const serif = ['Cirka', 'ObjectSans', 'sans-serif'].join(',');
+const serif = ['Libre Baskerville', 'ObjectSans', 'sans-serif'].join(',');
 
 export const lightTheme = responsiveFontSizes(createTheme({
     palette: {
@@ -28,10 +28,7 @@ export const lightTheme = responsiveFontSizes(createTheme({
     },
 
     typography: {
-      fontSize: 16,
-      allVariants: {
-        color: '#246636',
-      },
+      fontSize: 14,
       fontFamily: sansSerif,
       h6: {
         fontFamily: sansSerif,
@@ -83,19 +80,19 @@ export const darkTheme = responsiveFontSizes(createTheme({
   palette: {
     type: 'dark',
     text: {
-      primary: 'rgba(255, 255, 255, 0.85)',
-      secondary: '#FF6A8E',
+      primary: 'rgba(255, 255, 255, 0.8)',
+      secondary: '#fff',
       disabled: 'rgba(255, 255, 255, 0.4)',
     },
     primary: {
       main: 'rgba(255, 255, 255, 0.85)',
     },
     secondary: {
-      main: '#FF6A8E',
+      main: '#fff',
     },
     background: {
-      default: '#000000',
-      paper: 'rgba(255, 106, 142, 0.2)',
+      default: '#0C1517',
+      paper: 'rgba(255, 255, 255, 0.1)',
     },
   },
 
@@ -104,7 +101,7 @@ export const darkTheme = responsiveFontSizes(createTheme({
   },
 
   typography: {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: sansSerif,
     h6: {
       fontFamily: sansSerif,
@@ -115,7 +112,7 @@ export const darkTheme = responsiveFontSizes(createTheme({
     },
     h6: {
       fontFamily: serif,
-      fontSize: 24,
+      fontSize: 22,
     },
     body1: {
       fontFamily: serif,
