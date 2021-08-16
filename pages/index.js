@@ -127,7 +127,7 @@ const Hero = withTheme(({theme}) => (
         Joaquín Kunkel
       </span>
       <Muted>,<br/>
-      <span style={{whiteSpace: 'pre'}}>Product designer</span> who codes.</Muted>
+      <span style={{whiteSpace: 'pre'}}>product designer</span> who codes.</Muted>
     </Typography>
   </Box>
 ));
