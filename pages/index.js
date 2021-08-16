@@ -1,10 +1,9 @@
 import Head from 'next/head'
-import Link from 'next/link';
 import { useState, useRef, Children, useLayoutEffect, useEffect } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import useWindowSize from '@rooks/use-window-size';
 import useScrollPosition from '@react-hook/window-scroll';
-import { AppBar, Toolbar, IconButton, Box, Button, Divider, Grid, Paper, Tab, Tabs, Typography, Container, useMediaQuery, recomposeColor } from '@material-ui/core';
+import { AppBar, Toolbar, IconButton, Box, Button, Divider, Grid, Link, Paper, Tab, Tabs, Typography, Container, useMediaQuery, recomposeColor } from '@material-ui/core';
 import { ThemeProvider } from '@material-ui/core/styles';
 import { lightTheme, darkTheme } from '../src/theme';
 import { withTheme } from '@material-ui/core/styles';
@@ -63,7 +62,7 @@ const Home = withTheme(({theme}) => {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
       </Head>
-      <AppBar elevation={0} position="fixed" color="transparent" style={{boxShadow: `0 1px 0 ${theme.palette.action.divider}`, background: theme.palette.background.default}}>
+      <AppBar elevation={0} position="fixed" color="transparent" style={{boxShadow: `0 1px 0 ${theme.palette.divider}`, background: theme.palette.background.default}}>
         <Toolbar variant="dense">
           <Callout
             content={<EmailButton simplified text={isMedium ? '' : 'j@joaquin.world'} />}
@@ -72,22 +71,20 @@ const Home = withTheme(({theme}) => {
         </Toolbar>
       </AppBar>
         <Grid container spacing={5} style={{paddingTop: '10vh', width: '100%'}}>
-          <Block maxWidth="md">
+          <Block>
             <Hero /> {/* Welcome to the world... */}
           </Block>
-          <Block maxWidth="md">
-            <Callout
-              content={<EmailButton text="j@joaquin.world" />}
-              // caption="Let’s chat about design, eng, music, art, or life."
-              color="secondary"
-            />
-          </Block>
-          <Block/>
-          <Block maxWidth="md">
+          <Block>
             <ValueProp /> {/* I empower... */}
           </Block>
+          <Block>
+            <Callout
+              content={<EmailButton text="j@joaquin.world" />}
+              caption="Let’s chat about design, eng, music, art, or life."
+            />
+          </Block>
           <Block />
-          <Block maxWidth="md">
+          <Block maxWidth="xl">
             <Callout
               icon={<WorldIcon />}
               content={
@@ -95,9 +92,9 @@ const Home = withTheme(({theme}) => {
                   <Places orientation={isSmall ? 'vertical' : 'horizontal'} />
                 </Box>
               }
-            />
+              />
           </Block>
-          <Block maxWidth="md">
+          <Block>
             <Bio />
           </Block>
         </Grid>
@@ -119,14 +116,18 @@ const Hero = withTheme(({theme}) => (
   <Box paddingTop={5}>
     <Typography
       variant="h3"
+      // style={{textShadow: `0 0 200px ${theme.palette.text.secondary}`}}
     >
       <Muted>
         Hi, I'm&nbsp;
       </Muted>
-      <span style={{color: theme.palette.text.secondary}}>
+      <span
+        style={{color: theme.palette.text.secondary}}
+      >
         Joaquín Kunkel
       </span>
-      <Muted>. <span style={{whiteSpace: 'pre'}}>Product designer</span>, coder & visual artist.</Muted>
+      <Muted>,<br/>
+      <span style={{whiteSpace: 'pre'}}>Product designer</span> who codes.</Muted>
     </Typography>
   </Box>
 ));
@@ -136,6 +137,7 @@ const ValueProp = () => (
     <Typography variant="h6">
       I write code, build design systems, and empower teams to ask
       the right questions. I work for high impact and elevated craft.
+      I'm also a visual artist.
     </Typography>
   </Box>
 );
@@ -143,7 +145,7 @@ const ValueProp = () => (
 const Bio = () => (
   <Box maxWidth={600}>
     <Typography variant="h6">
-      Most recently, I owned product design at Cambly. Previously, I studied Computer Science and Visual Arts at NYU Abu Dhabi.
+      Most recently, I owned product design at <Link rel="noopener" color="secondary" target="_blank" href="http://cambly.com">Cambly</Link>. Previously, I studied Computer Science and Visual Arts at <Link target="_blank" rel="noopener" color="secondary" href="https://nyuad.nyu.edu/">NYU Abu Dhabi</Link>.
     </Typography>
   </Box>
 );
@@ -176,6 +178,10 @@ const Block = ({children, maxWidth}) => (
   }
   </>
 );
+
+Block.defaultProps = {
+  maxWidth: 'sm',
+};
 
 // A Callout renders a primary action or piece of info
 // along with an icon and an optional caption.
@@ -210,12 +216,12 @@ const Callout = ({icon, content, caption, color, rightAlign, style}) => (
 // Main CTA Button
 const EmailButton = withTheme(({theme, simplified, text}) => (
   <Button
-    color={simplified ? 'primary' : 'secondary'}
+    color={simplified ? 'primary' : 'primary'}
     size={simplified ? 'small' : 'medium'}
-    variant={simplified ? 'text' : 'contained'}
+    variant={simplified ? 'text' : 'outlined'}
     disableElevation
     onClick={email}
-    startIcon={<EmailIcon color={simplified ? 'primary' : theme.palette.background.default} customColor={!simplified} />}
+    endIcon={<EmailIcon />}
   >
     {text}
   </Button>
@@ -279,11 +285,11 @@ const Places = withTheme(({orientation, theme}) => {
         text="Abu Dhabi"
         style={{marginRight: 'auto'}}
         strikeThrough
-        // subtitle={
-        //   <Typography noWrap variant="body2" style={{color: theme.palette.text.disabled}}>
-        //     2015 - 2019
-        //   </Typography>
-        // }
+        subtitle={
+          <Typography noWrap variant="body2" style={{color: theme.palette.text.disabled}}>
+            2015 - 2019
+          </Typography>
+        }
       />
       {orientation === 'horizontal'
         &&  arrowContainer
@@ -292,11 +298,11 @@ const Places = withTheme(({orientation, theme}) => {
         text="San Francisco"
         style={{marginLeft: 'auto', marginRight: 'auto'}}
         strikeThrough
-        // subtitle={
-        //   <Typography noWrap variant="body2" style={{color: theme.palette.text.disabled}}>
-        //     2019-2020
-        //   </Typography>
-        // }
+        subtitle={
+          <Typography noWrap variant="body2" style={{color: theme.palette.text.disabled}}>
+            2019-2020
+          </Typography>
+        }
       />
       {orientation === 'horizontal'
         &&  arrowContainer
@@ -323,7 +329,7 @@ const Place = withTheme(({theme, text, innerRef, strikeThrough, highlight, subti
   >
     <Typography
       variant="subtitle1"
-      color={highlight && 'textPrimary'}
+      color={highlight && 'textSecondary'}
       noWrap
       style={{textDecoration: strikeThrough && 'line-through', color: !highlight && theme.palette.text.disabled}}
     >
