@@ -66,6 +66,9 @@ const globals = {
     MuiTypography: {
       color: 'textPrimary',
     },
+    MuiLink: {
+      underline: 'always',
+    },
   },
 };
 
