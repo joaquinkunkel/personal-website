@@ -4,7 +4,7 @@ import { useState, useRef, Children, useLayoutEffect, useEffect } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import useWindowSize from '@rooks/use-window-size';
 import useScrollPosition from '@react-hook/window-scroll';
-import { AppBar, Box, Button, Divider, Grid, Paper, Tab, Tabs, Typography, Container, useMediaQuery } from '@material-ui/core';
+import { AppBar, Toolbar, IconButton, Box, Button, Divider, Grid, Paper, Tab, Tabs, Typography, Container, useMediaQuery, recomposeColor } from '@material-ui/core';
 import { ThemeProvider } from '@material-ui/core/styles';
 import { lightTheme, darkTheme } from '../src/theme';
 import { withTheme } from '@material-ui/core/styles';
@@ -13,11 +13,12 @@ const email = () => {
   window.location.href = "mailto:j@joaquin.world";
 };
 
-const Home = () => {
+const Home = withTheme(({theme}) => {
   const scrollY = useScrollPosition(60);
   const showNav = scrollY > 200;
   const darkMode = useMediaQuery('(prefers-color-scheme: dark)');
   const isSmall = useMediaQuery('(max-width: 600px)');
+  const isMedium = useMediaQuery('(max-width: 900px)');
 
   return (
     <>
@@ -62,73 +63,87 @@ const Home = () => {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
       </Head>
-      <Container maxWidth="md">
-        <Grid container spacing={5} style={{paddingTop: 40}}>
-          {
-            !isSmall
-            && (
-              <Block>
-                <Callout
-                  icon={<WorldIcon />}
-                  content={
-                    <Places orientation="horizontal" />
-                  }
-                />
-              </Block>
-            )
-          }
-          <Block>
+      <AppBar position="fixed" color="transparent" style={{boxShadow: `0 1px 0 ${theme.palette.action.divider}`, background: theme.palette.background.default}}>
+        <Toolbar variant="dense">
+          <Callout
+            content={<EmailButton simplified text={isMedium ? '' : 'j@joaquin.world'} />}
+            style={{marginLeft: 'auto', width: 'auto'}}
+          />
+        </Toolbar>
+      </AppBar>
+        <Grid container spacing={5} style={{paddingTop: '10vh', width: '100%'}}>
+          <Block maxWidth="md">
             <Hero /> {/* Welcome to the world... */}
-            <ValueProp /> {/* I empower... */}
           </Block>
-          <Block>
+          <Block maxWidth="md">
             <Callout
-              icon={<EmailIcon />}
-              content={<EmailButton />}
-              caption="Let’s chat about design, eng, music, art, or life."
+              content={<EmailButton text="j@joaquin.world" />}
+              // caption="Let’s chat about design, eng, music, art, or life."
+              color="secondary"
             />
           </Block>
-          {
-            isSmall
-            && (
-              <Block>
-                <Callout
-                  icon={<WorldIcon />}
-                  content={
-                    <Places orientation="vertical" />
-                  }
-                />
-              </Block>
-            )
-          }
+          <Block/>
+          <Block maxWidth="md">
+            <ValueProp /> {/* I empower... */}
+          </Block>
+          <Block />
+          <Block maxWidth="md">
+            <Callout
+              icon={<WorldIcon />}
+              content={
+                <Box paddingLeft={1}>
+                  <Places orientation={isSmall ? 'vertical' : 'horizontal'} />
+                </Box>
+              }
+            />
+          </Block>
+          <Block maxWidth="md">
+            <Bio />
+          </Block>
         </Grid>
-      </Container>
     </>
   );
-}
+});
+
+const Muted = withTheme(({theme, color, children}) => (
+  <Typography
+    component="span"
+    variant="inherit"
+    style={{color: theme.palette.text.disabled}}
+  >
+    {children}
+  </Typography>
+));
 
 const Hero = withTheme(({theme}) => (
-  <Box>
+  <Box paddingTop={5}>
     <Typography
       variant="h3"
-      style={{color: theme.palette.text.secondary}}
     >
-      Joaquin Kunkel
-    </Typography>
-    <Typography
-      variant="h3"
-      style={{color: theme.palette.text.disabled}}
-    >
-      Product designer with an engineering background
+      <Muted>
+        Hi, I'm&nbsp;
+      </Muted>
+      <span style={{color: theme.palette.text.secondary}}>
+        Joaquín Kunkel
+      </span>
+      <Muted>. <span style={{whiteSpace: 'pre'}}>Product designer</span>, coder & visual artist.</Muted>
     </Typography>
   </Box>
 ));
 
 const ValueProp = () => (
-  <Box maxWidth={'500px'}>
-    <Typography variant="body1">
-      I write code, connect stakeholders, and empower teams to ask
-      the right questions in order to deliver products with high impact and elevated craft.
+  <Box maxWidth={600}>
+    <Typography variant="h6">
+      I write code, build design systems, and empower teams to ask
+      the right questions. I work for high impact and elevated craft.
+    </Typography>
+  </Box>
+);
+
+const Bio = () => (
+  <Box maxWidth={600}>
+    <Typography variant="h6">
+      Most recently, I owned product design at Cambly. Previously, I studied Computer Science and Visual Arts at NYU Abu Dhabi.
     </Typography>
   </Box>
 );
@@ -136,26 +151,38 @@ const ValueProp = () => (
 // A Block can contain one or multiple items inside.
 // items in a block are vertically stacked in a single
 // column with a spacing of 2.
-const Block = ({children}) => (
-  <Grid item xs={12}>
-    <Grid container spacing={3}>
-      {
-        Children.map(children, child => (
-          <Grid item xs={12}>
-            {child}
+// If a Block is empty, it serves as a md spacer.
+const Block = ({children, maxWidth}) => (
+  <>
+  {
+    children !== null ? (
+      <Grid item xs={12}>
+        <Container maxWidth={maxWidth}>
+          <Grid container spacing={0}>
+            {
+              Children.map(children, child => (
+                <Grid item xs={12}>
+                  {child}
+                </Grid>
+              ))
+            }
           </Grid>
-        ))
-      }
-    </Grid>
-  </Grid>
+        </Container>
+      </Grid>
+    )
+    : (
+      <Box height={4} width={4} />
+    )
+  }
+  </>
 );
 
 // A Callout renders a primary action or piece of info
 // along with an icon and an optional caption.
-const Callout = ({icon, content, caption, rightAlign}) => (
-  <Box style={{width: '100%'}}>
-    <Box style={{display: 'flex', alignItems: 'flex-start', maxWidth: 'calc(100% - 32px)'}}>
-      <Box style={{padding: 4}}>
+const Callout = ({icon, content, caption, color, rightAlign, style}) => (
+  <Box style={{width: '100%', ...style}}>
+    <Box style={{display: 'flex', alignItems: 'flex-start'}}>
+      <Box paddingY={0.5}>
         {icon}
       </Box>
       <Box style={{width: '100%'}}>
@@ -166,13 +193,13 @@ const Callout = ({icon, content, caption, rightAlign}) => (
       caption &&
         <Box
           style={{
-            paddingLeft: !rightAlign && 40,
+            paddingLeft: !rightAlign && icon && 32,
             paddingTop: 8,
             maxWidth: 400,
             marginLeft: rightAlign && 'auto',
           }}
         >
-          <Typography variant="body2" style={{textAlign: rightAlign && 'right'}}>
+          <Typography variant="body2" color={color} style={{textAlign: rightAlign && 'right'}}>
             {caption}
           </Typography>
         </Box>
@@ -181,21 +208,25 @@ const Callout = ({icon, content, caption, rightAlign}) => (
 );
 
 // Main CTA Button
-const EmailButton = () => (
-  <Paper elevation={0} style={{width: 'fit-content'}}>
-    <Button
-      color="secondary"
-      size="large"
-      onClick={email}
-      endIcon={<PinkArrow />}
-    >
-      j@joaquin.world
-    </Button>
-  </Paper>
-);
+const EmailButton = withTheme(({theme, simplified, text}) => (
+  <Button
+    color={simplified ? 'primary' : 'secondary'}
+    size={simplified ? 'small' : 'medium'}
+    variant={simplified ? 'text' : 'contained'}
+    disableElevation
+    onClick={email}
+    startIcon={<EmailIcon color={simplified ? 'primary' : theme.palette.background.default} customColor={!simplified} />}
+  >
+    {text}
+  </Button>
+));
+
+EmailButton.defaultProps = {
+  color: 'primary',
+};
 
 // Visualization of movings around
-const Places = ({orientation}) => {
+const Places = withTheme(({orientation, theme}) => {
   const containerRef = useRef(null);
 
   const abuDhabiRef = useRef(null);
@@ -211,74 +242,90 @@ const Places = ({orientation}) => {
     };
   }, [])
 
+  const currentPlaceSubtitle = (
+    <>
+      <Typography
+        variant="body2"
+        noWrap
+      >
+        {date.toDateString()}
+      </Typography>
+      <Typography
+        variant="body2"
+        noWrap
+      >
+        {date.toLocaleTimeString().substring(0, date.toLocaleTimeString().length - 6)} {date.toLocaleTimeString().substring(date.toLocaleTimeString().length - 2, date.toLocaleTimeString().length)}
+      </Typography>
+    </>
+  );
+  
+  const arrowContainer = (
+    <Box
+      padding={1.5}
+      width="100%"
+      display="flex"
+      alignItems="center"
+    >
+      <Box height="1px" width="100%" bgcolor={theme.palette.text.disabled}/>
+      <Arrow />
+    </Box>
+  )
   return (
     <div
       ref={containerRef}
-      style={{display: 'flex', alignItems: 'flex-start', width: '100%', flexDirection: orientation === 'vertical' ? 'column' : 'row'}}
+      style={{display: orientation === 'horizontal' && 'flex', alignItems: 'flex-start', width: '100%', flexDirection: orientation === 'vertical' ? 'column' : 'row'}}
     >
       <Place
         text="Abu Dhabi"
-        subtitle={
-          <Typography variant="body2" color="textPrimary">
-            2015 - 2019
-          </Typography>
-        }
+        style={{marginRight: 'auto'}}
+        strikeThrough
+        // subtitle={
+        //   <Typography noWrap variant="body2" style={{color: theme.palette.text.disabled}}>
+        //     2015 - 2019
+        //   </Typography>
+        // }
       />
-      <Box
-        padding={orientation === 'horizontal' && 1}
-        
-      >
-        <Arrow orientation={orientation} />
-      </Box>
+      {orientation === 'horizontal'
+        &&  arrowContainer
+      }
       <Place
         text="San Francisco"
-        subtitle={
-          <Typography variant="body2" color="textPrimary">
-            2019 - 2020
-          </Typography>
-        }
+        style={{marginLeft: 'auto', marginRight: 'auto'}}
+        strikeThrough
+        // subtitle={
+        //   <Typography noWrap variant="body2" style={{color: theme.palette.text.disabled}}>
+        //     2019-2020
+        //   </Typography>
+        // }
       />
-      <Box padding={orientation === 'horizontal' && 1}>
-        <Arrow orientation={orientation} />
-      </Box>
+      {orientation === 'horizontal'
+        &&  arrowContainer
+      }
       <Place
         text="Mexico City"
-        subtitle={
-          <>
-            <Typography
-              variant="body2"
-              color="textSecondary"
-            >
-              {date.toDateString()}
-            </Typography>
-            <Typography
-              variant="body2"
-              color="textSecondary"
-            >
-              {date.toLocaleTimeString().substring(0, date.toLocaleTimeString().length - 6)} {date.toLocaleTimeString().substring(date.toLocaleTimeString().length - 2, date.toLocaleTimeString().length)}
-            </Typography>
-          </>
-        }
+        style={{marginLeft: 'auto'}}
+        subtitle={currentPlaceSubtitle}
         highlight
       />
     </div>
   );
-};
+});
 
 Places.defaultProps = {
   orientation: 'horizontal',
 };
 
-const Place = ({text, innerRef, strikeThrough, highlight, subtitle}) => (
+const Place = withTheme(({theme, text, innerRef, strikeThrough, highlight, subtitle, style}) => (
   <Box
     ref={innerRef}
     paddingY={1}
+    style={style}
   >
     <Typography
       variant="subtitle1"
-      color={highlight && 'textSecondary'}
+      color={highlight && 'textPrimary'}
       noWrap
-      style={{textDecoration: strikeThrough && 'line-through'}}
+      style={{textDecoration: strikeThrough && 'line-through', color: !highlight && theme.palette.text.disabled}}
     >
       {text}
     </Typography>
@@ -286,59 +333,52 @@ const Place = ({text, innerRef, strikeThrough, highlight, subtitle}) => (
       subtitle
     }
   </Box>
-);
+));
 
 // Icons:
 
-const EmailIcon = withTheme(({theme}) => {
-  const color = theme.palette.text.primary;
+const EmailIcon = withTheme(({theme, color, customColor}) => {
+  const mainColor = customColor ? color : theme.palette[color].main;
   return (
     <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect x="-0.5" y="0.5" width="19" height="13" rx="0.5" transform="matrix(-1 0 0 1 25 9)" stroke={color}/>
-      <path d="M15.8535 18.2929L25 9.14645L25.0606 10.5L16.5606 19C16.1701 19.3905 15.5369 19.3905 15.1464 19L6.54305 10.3966L6.70707 9.14645L15.8535 18.2929Z" fill={color}/>
+      <rect x="-0.5" y="0.5" width="19" height="13" rx="0.5" transform="matrix(-1 0 0 1 25 9)" stroke={mainColor}/>
+      <path d="M15.8535 18.2929L25 9.14645L25.0606 10.5L16.5606 19C16.1701 19.3905 15.5369 19.3905 15.1464 19L6.54305 10.3966L6.70707 9.14645L15.8535 18.2929Z" fill={mainColor}/>
     </svg>
   );
 });
 
-const WorldIcon = withTheme(({theme}) => {
-  const color = theme.palette.text.primary;
+EmailIcon.defaultProps = {
+  color: 'primary',
+  customColor: false,
+};
+
+const WorldIcon = withTheme(({theme, color}) => {
+  const mainColor = theme.palette[color].main;
   return (
     <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="16" cy="16" r="9.5" stroke={color} />
-      <path d="M21.5 16C21.5 18.6864 20.8456 21.0942 19.8139 22.8138C18.7762 24.5434 17.4122 25.5 16 25.5C14.5878 25.5 13.2238 24.5434 12.1861 22.8138C11.1544 21.0942 10.5 18.6864 10.5 16C10.5 13.3136 11.1544 10.9058 12.1861 9.18618C13.2238 7.45665 14.5878 6.5 16 6.5C17.4122 6.5 18.7762 7.45665 19.8139 9.18618C20.8456 10.9058 21.5 13.3136 21.5 16Z" stroke={color} />
-      <line x1="16" y1="7" x2="16" y2="25" stroke={color} />
-      <line x1="25" y1="16" x2="7" y2="16" stroke={color} />
-      <line x1="24" y1="10.5" x2="8" y2="10.5" stroke={color} />
-      <line x1="24" y1="21.5" x2="8" y2="21.5" stroke={color} />
+      <circle cx="16" cy="16" r="9.5" stroke={mainColor}/>
+      <path d="M20.5 16C20.5 18.7006 19.9516 21.1209 19.0883 22.8475C18.2101 24.604 17.0893 25.5 16 25.5C14.9107 25.5 13.7899 24.604 12.9117 22.8475C12.0484 21.1209 11.5 18.7006 11.5 16C11.5 13.2994 12.0484 10.8791 12.9117 9.15254C13.7899 7.39605 14.9107 6.5 16 6.5C17.0893 6.5 18.2101 7.39605 19.0883 9.15254C19.9516 10.8791 20.5 13.2994 20.5 16Z" stroke={mainColor}/>
+      <path d="M16 13.5C18.7268 13.5 21.1761 13.8322 22.9274 14.3576C23.8062 14.6212 24.481 14.9252 24.9249 15.2401C25.3818 15.5642 25.5 15.8282 25.5 16C25.5 16.1718 25.3818 16.4358 24.9249 16.7599C24.481 17.0748 23.8062 17.3788 22.9274 17.6424C21.1761 18.1678 18.7268 18.5 16 18.5C13.2732 18.5 10.8239 18.1678 9.07261 17.6424C8.19378 17.3788 7.51902 17.0748 7.07512 16.7599C6.61823 16.4358 6.5 16.1718 6.5 16C6.5 15.8282 6.61823 15.5642 7.07512 15.2401C7.51902 14.9252 8.19378 14.6212 9.07261 14.3576C10.8239 13.8322 13.2732 13.5 16 13.5Z" stroke={mainColor}/>
+      <line x1="16" y1="7" x2="16" y2="25" stroke={mainColor}/>
     </svg>
   );
 });
 
-const Arrow = withTheme(({theme, orientation}) => {
-  const color = theme.palette.text.primary;
+WorldIcon.defaultProps = {
+  color: 'primary',
+};
+
+const Arrow = withTheme(({theme, color}) => {
+  const mainColor = theme.palette.text[color];
   return (
-    orientation === 'horizontal'
-    ? (      
-      <svg width="41" height="9" viewBox="0 0 41 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M40.3536 5.35355C40.5488 5.15829 40.5488 4.84171 40.3536 4.64645L37.1716 1.46447C36.9763 1.2692 36.6597 1.2692 36.4645 1.46447C36.2692 1.65973 36.2692 1.97631 36.4645 2.17157L39.2929 5L36.4645 7.82843C36.2692 8.02369 36.2692 8.34027 36.4645 8.53553C36.6597 8.7308 36.9763 8.7308 37.1716 8.53553L40.3536 5.35355ZM0 5.5H40V4.5H0V5.5Z" fill={color} />
+      <svg width="41" height="10" viewBox="0 0 41 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M40.3536 5.35355C40.5488 5.15829 40.5488 4.84171 40.3536 4.64645L37.1716 1.46447C36.9763 1.2692 36.6597 1.2692 36.4645 1.46447C36.2692 1.65973 36.2692 1.97631 36.4645 2.17157L39.2929 5L36.4645 7.82843C36.2692 8.02369 36.2692 8.34027 36.4645 8.53553C36.6597 8.7308 36.9763 8.7308 37.1716 8.53553L40.3536 5.35355ZM0 5.5H40V4.5H0V5.5Z" fill={mainColor} />
       </svg>
-    )
-    : (
-      <svg width="10" height="21" viewBox="0 0 10 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M5.35355 20.8536C5.15829 21.0488 4.84171 21.0488 4.64644 20.8536L1.46446 17.6716C1.2692 17.4763 1.2692 17.1597 1.46446 16.9645C1.65973 16.7692 1.97631 16.7692 2.17157 16.9645L5 19.7929L7.82842 16.9645C8.02369 16.7692 8.34027 16.7692 8.53553 16.9645C8.73079 17.1597 8.73079 17.4763 8.53553 17.6716L5.35355 20.8536ZM5.5 0.5L5.5 20.5L4.5 20.5L4.5 0.5L5.5 0.5Z" fill={color} />
-      </svg>
-    )
-  );
+    );
 });
 
-const PinkArrow = withTheme(({theme}) => {
-  const color = theme.palette.text.secondary;
-  return (
-    <svg width="32" height="13" viewBox="0 0 32 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M26.3536 6.85355C26.5488 6.65829 26.5488 6.34171 26.3536 6.14645L23.1716 2.96447C22.9763 2.7692 22.6597 2.7692 22.4645 2.96447C22.2692 3.15973 22.2692 3.47631 22.4645 3.67157L25.2929 6.5L22.4645 9.32843C22.2692 9.52369 22.2692 9.84027 22.4645 10.0355C22.6597 10.2308 22.9763 10.2308 23.1716 10.0355L26.3536 6.85355ZM6 7H26V6H6V7Z" fill={color} />
-    </svg>
-  );
-});
-
+Arrow.defaultProps = {
+  color: 'disabled',
+};
 
 export default Home;
