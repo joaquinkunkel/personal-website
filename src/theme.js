@@ -24,12 +24,15 @@ const globals = {
       fontSize: 60,
     },
     h3: {
-      fontWeight: 700,
+      // fontFamily: ['Agrandir', sansSerif].join(','),
+      fontFamily: sansSerif,
+      fontWeight: 600,
       fontSize: 50,
+      // textTransform: 'uppercase',
     },
     h6: {
       fontFamily: serif,
-      fontSize: 18,
+      fontSize: 20,
       lineHeight: 2,
     },
     body1: {
@@ -77,18 +80,18 @@ export const lightTheme = responsiveFontSizes(createTheme({
   palette: {
     type: 'light',
     text: {
-      primary: 'rgba(25, 54, 34, 0.8)',
-      secondary: '#DB2768',
-      disabled: 'rgba(25, 54, 34, 0.55)',
+      primary: 'rgba(0, 0, 0, 1)',
+      secondary: '#db3755',
+      // disabled: 'rgba(25, 54, 34, 0.55)',
     },
     primary: {
-      main: 'rgba(25, 54, 34, 0.8)',
+      main: 'rgba(0, 0, 0, 0.8)',
     },
     secondary: {
-      main: '#DB2768',
+      main: '#db3755',
     },
     background: {
-      // default: '#000',
+      default: '#fff',
     },
   },
 }));
@@ -98,18 +101,18 @@ export const darkTheme = responsiveFontSizes(createTheme({
   palette: {
     type: 'dark',
     text: {
-      primary: 'rgba(255, 255, 255, 0.85)',
-      secondary: 'rgba(255, 255, 255, 0.95)',
+      primary: 'rgba(255, 255, 255, 1)',
+      secondary: '#c578ff',
       disabled: 'rgba(255, 255, 255, 0.5)',
     },
     primary: {
       main: 'rgba(255, 255, 255, 0.85)',
     },
     secondary: {
-      main: '#fff',
+      main: '#c578ff',
     },
     background: {
-      default: '#0C1517',
+      default: '#000',
     },
   },
 }));

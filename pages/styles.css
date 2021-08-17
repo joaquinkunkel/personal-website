@@ -53,3 +53,12 @@
     font-weight: 600;
     font-display: swap;
 }
+
+@font-face {
+    font-family: "Agrandir";
+    src: url("/fonts/Agrandir-GrandHeavy.ttf");
+    font-style: bold;
+    font-weight: 700;
+    font-display: swap;
+}
+

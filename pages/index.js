@@ -58,6 +58,12 @@ const Home = withTheme(({theme}) => {
           as="font"
           crossOrigin=""
         />
+        <link
+          rel="preload"
+          href="/fonts/Agrandir-GrandHeavy.ttf"
+          as="font"
+          crossOrigin=""
+        />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
@@ -78,14 +84,16 @@ const Home = withTheme(({theme}) => {
           </Container>
         </Toolbar>
       </AppBar>
-        <Grid container spacing={5} style={{paddingTop: '8vh', width: '100%'}}>
+        <Grid container spacing={10} style={{paddingTop: '5vh'}}>
           <Block>
             <Hero /> {/* Welcome to the world... */}
           </Block>
           <Block>
             <ValueProp /> {/* I empower... */}
           </Block>
-          <Block />
+          <Block>
+            <Bio />
+          </Block>
           <Block
             // maxWidth="xl"
           >
@@ -99,13 +107,12 @@ const Home = withTheme(({theme}) => {
               />
           </Block>
           <Block>
-            <Bio />
-          </Block>
-          <Block>
             <Callout
               content={
                 <EmailButton
                   variant="outlined"
+                  color="primary"
+                  disableElevation={false}
                   text="j@joaquin.world"
                   icon={<EmailIcon />}
                 />}
@@ -121,7 +128,7 @@ const Muted = withTheme(({theme, color, children}) => (
   <Typography
     component="span"
     variant="inherit"
-    style={{color: theme.palette.text.disabled}}
+    // style={{color: theme.palette.text.disabled}}
   >
     {children}
   </Typography>
@@ -134,7 +141,7 @@ const Hero = withTheme(({theme}) => (
       // style={{textShadow: `0 0 200px ${theme.palette.text.secondary}`}}
     >
       <Muted>
-        Hi, I'm&nbsp;
+        Hi. I'm&nbsp;
       </Muted>
       <span
         style={{color: theme.palette.text.secondary}}
@@ -142,13 +149,13 @@ const Hero = withTheme(({theme}) => (
         Joaquín Kunkel
       </span>
       <Muted>,<br/>
-      <span style={{whiteSpace: 'pre'}}>product designer</span> who codes.</Muted>
+      <span style={{whiteSpace: 'pre'}}>product designer</span> with an engineering background.</Muted>
     </Typography>
   </Box>
 ));
 
 const ValueProp = () => (
-  <Box maxWidth={600}>
+  <Box>
     <Typography variant="h6">
       I write code, build design systems, and empower teams to ask
       the right questions. I work for high impact and elevated craft.
@@ -158,7 +165,7 @@ const ValueProp = () => (
 );
 
 const Bio = () => (
-  <Box maxWidth={600}>
+  <Box>
     <Typography variant="h6">
       Most recently, I owned product design at <Link rel="noopener" color="secondary" target="_blank" href="http://cambly.com">Cambly</Link>. Previously, I studied Computer Science and Visual Arts at <Link target="_blank" rel="noopener" color="secondary" href="https://nyuad.nyu.edu/">NYU Abu Dhabi</Link>.
     </Typography>
@@ -215,7 +222,7 @@ const Callout = ({icon, content, caption, color, rightAlign, style}) => (
         <Box
           style={{
             paddingLeft: !rightAlign && icon && 32,
-            paddingTop: 8,
+            paddingTop: 16,
             maxWidth: 400,
             marginLeft: rightAlign && 'auto',
           }}
@@ -229,7 +236,7 @@ const Callout = ({icon, content, caption, color, rightAlign, style}) => (
 );
 
 // Main CTA Button
-const EmailButton = withTheme(({theme, simplified, text, icon, variant}) => (
+const EmailButton = withTheme(({theme, simplified, text, icon, variant, color}) => (
   <>
   {
     simplified
@@ -238,6 +245,7 @@ const EmailButton = withTheme(({theme, simplified, text, icon, variant}) => (
         size={'small'}
         disableElevation
         onClick={email}
+        color={color}
       >
         {icon}
       </IconButton>
@@ -249,6 +257,7 @@ const EmailButton = withTheme(({theme, simplified, text, icon, variant}) => (
         onClick={email}
         variant={variant}
         endIcon={icon}
+        color={color}
       >
         {text}
       </Button>
