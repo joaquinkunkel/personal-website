@@ -30,6 +30,9 @@ const globals = {
       fontSize: 50,
       // textTransform: 'uppercase',
     },
+    h5: {
+      fontWeight: 600,
+    },
     h6: {
       fontFamily: serif,
       fontSize: 18,

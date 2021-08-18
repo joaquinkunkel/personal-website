@@ -3,13 +3,14 @@ import { useState, useRef, Children, useLayoutEffect, useEffect } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import useWindowSize from '@rooks/use-window-size';
 import useScrollPosition from '@react-hook/window-scroll';
-import { AppBar, Toolbar, IconButton, Box, Button, Divider, Grid, Link, Paper, Tab, Tabs, Typography, Container, useMediaQuery, recomposeColor } from '@material-ui/core';
+import { AppBar, Toolbar, IconButton, Box, Button, Chip, Divider, Grid, Link, Paper, Tab, Tabs, Typography, Container, useMediaQuery, recomposeColor } from '@material-ui/core';
 import { ThemeProvider } from '@material-ui/core/styles';
 import { lightTheme, darkTheme } from '../src/theme';
 import { withTheme } from '@material-ui/core/styles';
 
 const email = () => {
-  window.location.href = "mailto:j@joaquin.world";
+  // window.location.href = "mailto:j@joaquin.world";
+  window.location.href = "mailto:joaquinkunkel@gmail.com";
 };
 
 const Home = withTheme(({theme}) => {
@@ -81,7 +82,11 @@ const Home = withTheme(({theme}) => {
       >
         <Toolbar>
           <Container maxWidth="lg" style={{display: 'flex', justifyContent: 'flex-end'}}>
-            <EmailButton simplified={!isMedium} text={!isMedium ? '' : 'j@joaquin.world'} icon={<EmailIcon />}/>
+            <EmailButton
+              simplified
+              // text={!isMedium ? '' : 'j@joaquin.world'}
+              icon={<EmailIcon />}
+            />
           </Container>
         </Toolbar>
       </AppBar>
@@ -92,12 +97,39 @@ const Home = withTheme(({theme}) => {
           <Block>
             <ValueProp /> {/* I empower... */}
           </Block>
+          
+          {/* Case studies */}
+
+          <ArticleLink
+            title="Cambly Onboarding"
+            subtitle="Improving conversion by making a great first impression"
+            color="#EEBFB4"
+            imgSrc="/case_studies/Welcome Screen.png"
+            comingSoon
+          />
+
+          <ArticleLink
+            title="Tutor Reviews and Feedback"
+            subtitle="Gathering meaningful, actionable feedback from students"
+            color="#CBE5E1"
+            imgSrc="/case_studies/Tutor Reviews.png"
+            comingSoon
+          />
+
+          <ArticleLink
+            title="Tutor Signup"
+            subtitle="Briding gaps between stakeholders to provide a smoother tutor funnel"
+            color="#EEEEEE"
+            imgSrc="/case_studies/Tutor Signup Flow.png"
+            comingSoon
+          />
+
           <Block
-            maxWidth={isMedium ? 'xl': 'sm'}
-            style={{background: theme.palette.action.hover}}
+            maxWidth={isMedium ? 'xl': 'md'}
+            style={{paddingLeft: 20, paddingRight: 20, background: theme.palette.action.hover, borderTop: `2px solid ${theme.palette.divider}`, borderBottom: `2px solid ${theme.palette.divider}`}}
           >
             <Callout
-              style={{paddingTop: 24, paddingBottom: 24}}
+              style={{paddingTop: 80, paddingBottom: 80}}
               icon={<WorldIcon />}
               content={
                 <Box paddingX={4}>
@@ -119,7 +151,8 @@ const Home = withTheme(({theme}) => {
                   variant="outlined"
                   color="primary"
                   disableElevation={false}
-                  text="j@joaquin.world"
+                  text="joaquinkunkel@gmail.com"
+                  // text="j@joaquin.world"
                   icon={<EmailIcon />}
                 />}
               caption="Let’s chat about design, eng, music, art, or life."
@@ -186,17 +219,17 @@ const Block = ({children, maxWidth, style}) => (
   <>
   {
     children !== null ? (
-      <Grid item style={{paddingLeft: 0, paddingRight: 0, ...style}} xs={12}>
+      <Grid item style={{paddingLeft: 0, paddingRight: 0}} xs={12}>
         <Container maxWidth={maxWidth}>
-          {/* <Grid container spacing={0}> */}
+          <Box style={style}>
             {
               Children.map(children, child => (
-                <Grid item xs={12}>
+                <Box>
                   {child}
-                </Grid>
+                </Box>
               ))
             }
-          {/* </Grid> */}
+          </Box>
         </Container>
       </Grid>
     )
@@ -334,7 +367,7 @@ const Places = withTheme(({orientation, theme}) => {
       alignItems="center"
     >
       <ArrowLine width="100%"/>
-      <Box position="relative" left="-3px" top="-1px">
+      <Box position="relative" left="-3px">
         <ArrowTip />
       </Box>
     </Box>
@@ -510,5 +543,48 @@ ArrowLine.defaultProps = {
   color: 'disabled',
   width: '20',
 };
+
+const ArticleLink = withTheme(({theme, title, subtitle, imgSrc, color, comingSoon}) => {
+  return (
+    <Block>
+      <div
+        style={{
+          textAlign: 'center',
+          maxHeight: 400,
+          background: color,
+          borderRadius: 4,
+        }}
+      >
+        <img style={{
+          maxHeight: 400,
+          height: 'auto',
+          maxWidth: '100%',
+        }} src={imgSrc} />
+      </div>
+      <br />
+      <Typography variant="h5">
+        {
+          comingSoon &&
+          <>
+            <Chip
+              // color="primary"
+              // variant="outlined"
+              label="WIP"
+              style={{marginRight: 10}}
+              />
+          </>
+        }
+        {title}
+      </Typography>
+      <Typography
+        variant="h6"
+        // color="textSecondary"
+        style={{color: theme.palette.text.disabled}}
+      >
+        {subtitle}
+      </Typography>
+    </Block>
+  );
+});
 
 export default Home;
