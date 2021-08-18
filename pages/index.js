@@ -241,7 +241,7 @@ const Block = ({children, maxWidth, style}) => (
 );
 
 Block.defaultProps = {
-  maxWidth: 'sm',
+  maxWidth: 'md',
 };
 
 // A Callout renders a primary action or piece of info
