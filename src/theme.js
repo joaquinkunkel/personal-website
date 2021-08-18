@@ -32,7 +32,7 @@ const globals = {
     },
     h6: {
       fontFamily: serif,
-      fontSize: 20,
+      fontSize: 18,
       lineHeight: 2,
     },
     body1: {
@@ -81,14 +81,14 @@ export const lightTheme = responsiveFontSizes(createTheme({
     type: 'light',
     text: {
       primary: 'rgba(0, 0, 0, 1)',
-      secondary: '#db3755',
-      // disabled: 'rgba(25, 54, 34, 0.55)',
+      secondary: '#7167E2',
+      disabled: 'rgba(0, 0, 0, 0.45)',
     },
     primary: {
       main: 'rgba(0, 0, 0, 0.8)',
     },
     secondary: {
-      main: '#db3755',
+      main: '#7167E2',
     },
     background: {
       default: '#fff',

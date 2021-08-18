@@ -16,8 +16,9 @@ const Home = withTheme(({theme}) => {
   const scrollY = useScrollPosition(60);
   const showNav = scrollY > 200;
   const darkMode = useMediaQuery('(prefers-color-scheme: dark)');
-  const isSmall = useMediaQuery('(max-width: 600px)');
-  const isMedium = useMediaQuery('(min-width: 900px)');
+  const isSmall = !(useMediaQuery(theme.breakpoints.up('sm')));
+  const isMedium = useMediaQuery(theme.breakpoints.up('md'));
+  const isLarge = useMediaQuery(theme.breakpoints.up('lg'));
 
   return (
     <>
@@ -79,33 +80,37 @@ const Home = withTheme(({theme}) => {
         }}
       >
         <Toolbar>
-          <Container maxWidth="sm" style={{display: 'flex', justifyContent: 'flex-end'}}>
+          <Container maxWidth="lg" style={{display: 'flex', justifyContent: 'flex-end'}}>
             <EmailButton simplified={!isMedium} text={!isMedium ? '' : 'j@joaquin.world'} icon={<EmailIcon />}/>
           </Container>
         </Toolbar>
       </AppBar>
-        <Grid container spacing={10} style={{paddingTop: '5vh'}}>
+        <Grid container spacing={10} style={{paddingTop: '5vh', width: '100%', margin: 0}}>
           <Block>
             <Hero /> {/* Welcome to the world... */}
           </Block>
           <Block>
             <ValueProp /> {/* I empower... */}
           </Block>
-          <Block>
-            <Bio />
-          </Block>
           <Block
-            // maxWidth="xl"
+            maxWidth={isMedium ? 'xl': 'sm'}
+            style={{background: theme.palette.action.hover}}
           >
             <Callout
               icon={<WorldIcon />}
               content={
-                <Box paddingLeft={1}>
-                  <Places orientation={isSmall ? 'vertical' : 'horizontal'} />
+                <Box paddingX={4}>
+                  <Places orientation={!isMedium ? 'vertical' : 'horizontal'} />
                 </Box>
               }
               />
           </Block>
+          <Block>
+            <Bio />
+          </Block>
+          {/* <Block>
+            <Bio />
+          </Block> */}
           <Block>
             <Callout
               content={
@@ -135,7 +140,7 @@ const Muted = withTheme(({theme, color, children}) => (
 ));
 
 const Hero = withTheme(({theme}) => (
-  <Box paddingTop={5}>
+  <Box paddingTop={0}>
     <Typography
       variant="h3"
       // style={{textShadow: `0 0 200px ${theme.palette.text.secondary}`}}
@@ -167,7 +172,7 @@ const ValueProp = () => (
 const Bio = () => (
   <Box>
     <Typography variant="h6">
-      Most recently, I owned product design at <Link rel="noopener" color="secondary" target="_blank" href="http://cambly.com">Cambly</Link>. Previously, I studied Computer Science and Visual Arts at <Link target="_blank" rel="noopener" color="secondary" href="https://nyuad.nyu.edu/">NYU Abu Dhabi</Link>.
+      I'm currently working as a freelance designer in my hometown. Before this, I owned product design at <Link rel="noopener" color="secondary" target="_blank" href="http://cambly.com">Cambly</Link>. I studied Computer Science and Visual Arts at <Link target="_blank" rel="noopener" color="secondary" href="https://nyuad.nyu.edu/">NYU Abu Dhabi</Link>.
     </Typography>
   </Box>
 );
@@ -176,13 +181,13 @@ const Bio = () => (
 // items in a block are vertically stacked in a single
 // column with a spacing of 2.
 // If a Block is empty, it serves as a md spacer.
-const Block = ({children, maxWidth}) => (
+const Block = ({children, maxWidth, style}) => (
   <>
   {
     children !== null ? (
-      <Grid item xs={12}>
+      <Grid item style={{paddingLeft: 0, paddingRight: 0, ...style}} xs={12}>
         <Container maxWidth={maxWidth}>
-          <Grid container spacing={0}>
+          {/* <Grid container spacing={0}> */}
             {
               Children.map(children, child => (
                 <Grid item xs={12}>
@@ -190,7 +195,7 @@ const Block = ({children, maxWidth}) => (
                 </Grid>
               ))
             }
-          </Grid>
+          {/* </Grid> */}
         </Container>
       </Grid>
     )
@@ -223,7 +228,6 @@ const Callout = ({icon, content, caption, color, rightAlign, style}) => (
           style={{
             paddingLeft: !rightAlign && icon && 32,
             paddingTop: 16,
-            maxWidth: 400,
             marginLeft: rightAlign && 'auto',
           }}
         >
@@ -293,27 +297,45 @@ const Places = withTheme(({orientation, theme}) => {
       <Typography
         variant="body2"
         noWrap
+        color="textSecondary"
+        style={{color: theme.palette.text.disabled}}
+      >
+        Now
+      </Typography>
+      <Typography variant="body2">
+        Freelancer
+      </Typography>
+      {/* <Typography
+        variant="body2"
+        noWrap
+        color="textSecondary"
+        style={{color: theme.palette.text.disabled}}
       >
         {date.toDateString()}
       </Typography>
       <Typography
         variant="body2"
         noWrap
+        color="textSecondary"
+        style={{color: theme.palette.text.disabled}}
       >
         {date.toLocaleTimeString().substring(0, date.toLocaleTimeString().length - 6)} {date.toLocaleTimeString().substring(date.toLocaleTimeString().length - 2, date.toLocaleTimeString().length)}
-      </Typography>
+      </Typography> */}
     </>
   );
   
   const arrowContainer = (
     <Box
-      padding={1.5}
+      paddingY={1}
+      paddingX={4}
       width="100%"
       display="flex"
       alignItems="center"
     >
-      <Box height="1px" width="100%" bgcolor={theme.palette.text.disabled}/>
-      <Arrow />
+      <ArrowLine width="100%"/>
+      <Box position="relative" left="-3px" top="-1px">
+        <ArrowTip />
+      </Box>
     </Box>
   )
   return (
@@ -322,33 +344,66 @@ const Places = withTheme(({orientation, theme}) => {
       style={{display: orientation === 'horizontal' && 'flex', alignItems: 'flex-start', width: '100%', flexDirection: orientation === 'vertical' ? 'column' : 'row'}}
     >
       <Place
-        text="Abu Dhabi"
+        text="Abu Dhabi, UAE"
         style={{marginRight: 'auto'}}
-        strikeThrough
         subtitle={
-          <Typography noWrap variant="body2" style={{color: theme.palette.text.disabled}}>
-            2015 - 2019
-          </Typography>
+          <>
+            <Typography noWrap variant="body2" style={{color: theme.palette.text.disabled}}>
+              2015-2018
+            </Typography>
+            <Typography noWrap variant="body2">
+              CS & VisArts
+              {orientation === 'horizontal' ? <br /> : ' '}
+              @ NYU
+            </Typography>
+          </>
         }
       />
       {orientation === 'horizontal'
         &&  arrowContainer
       }
       <Place
-        text="San Francisco"
+        text="New York, NY"
         style={{marginLeft: 'auto', marginRight: 'auto'}}
-        strikeThrough
+        // strikeThrough
         subtitle={
-          <Typography noWrap variant="body2" style={{color: theme.palette.text.disabled}}>
-            2019-2020
-          </Typography>
+          <>
+            <Typography noWrap variant="body2" style={{color: theme.palette.text.disabled}}>
+              2018-2019
+            </Typography>
+            <Typography noWrap variant="body2">
+              UI Design
+              {orientation === 'horizontal' ? <br /> : ' '}
+              @ Coursedog
+            </Typography>
+          </>
         }
       />
       {orientation === 'horizontal'
         &&  arrowContainer
       }
       <Place
-        text="Mexico City"
+        text="San Francisco, CA"
+        style={{marginLeft: 'auto', marginRight: 'auto'}}
+        // strikeThrough
+        subtitle={
+          <>
+            <Typography noWrap variant="body2" style={{color: theme.palette.text.disabled}}>
+              2019-2020
+            </Typography>
+            <Typography noWrap variant="body2">
+              Product Design
+              {orientation === 'horizontal' ? <br /> : ' '}
+              @ Cambly
+            </Typography>
+          </>
+        }
+      />
+      {orientation === 'horizontal'
+        &&  arrowContainer
+      }
+      <Place
+        text="Mexico City, MX"
         style={{marginLeft: 'auto'}}
         subtitle={currentPlaceSubtitle}
         highlight
@@ -371,7 +426,7 @@ const Place = withTheme(({theme, text, innerRef, strikeThrough, highlight, subti
       variant="subtitle1"
       color={highlight && 'textSecondary'}
       noWrap
-      style={{textDecoration: strikeThrough && 'line-through', color: !highlight && theme.palette.text.disabled}}
+      style={{textDecoration: strikeThrough && 'line-through'}}
     >
       {text}
     </Typography>
@@ -417,14 +472,42 @@ WorldIcon.defaultProps = {
 const Arrow = withTheme(({theme, color}) => {
   const mainColor = theme.palette.text[color];
   return (
-      <svg width="41" height="10" viewBox="0 0 41 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M40.3536 5.35355C40.5488 5.15829 40.5488 4.84171 40.3536 4.64645L37.1716 1.46447C36.9763 1.2692 36.6597 1.2692 36.4645 1.46447C36.2692 1.65973 36.2692 1.97631 36.4645 2.17157L39.2929 5L36.4645 7.82843C36.2692 8.02369 36.2692 8.34027 36.4645 8.53553C36.6597 8.7308 36.9763 8.7308 37.1716 8.53553L40.3536 5.35355ZM0 5.5H40V4.5H0V5.5Z" fill={mainColor} />
-      </svg>
-    );
+    <svg width="21" height="9" viewBox="0 0 21 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M17.1716 8.03568L20.3536 4.8537C20.5488 4.65844 20.5488 4.34186 20.3536 4.1466L17.1716 0.964616C16.9763 0.769354 16.6597 0.769354 16.4645 0.964616C16.2692 1.15988 16.2692 1.47646 16.4645 1.67172L18.7929 4.00015L3.656e-07 4.00015L2.78178e-07 5.00015L18.7929 5.00015L16.4645 7.32858C16.2692 7.52384 16.2692 7.84042 16.4645 8.03568C16.6597 8.23095 16.9763 8.23095 17.1716 8.03568Z" fill={mainColor} />
+    </svg>
+  );
 });
 
 Arrow.defaultProps = {
   color: 'disabled',
+};
+
+const ArrowTip = withTheme(({theme, color}) => {
+  const mainColor = theme.palette.text[color];
+  return (
+    <svg width="5" height="9" viewBox="0 0 5 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M0.853553 0.964318L4.03553 4.1463C4.2308 4.34156 4.2308 4.65814 4.03553 4.85341L0.853553 8.03539C0.658291 8.23065 0.341708 8.23065 0.146446 8.03539C-0.0488162 7.84012 -0.0488161 7.52354 0.146446 7.32828L2.47487 4.99985L3 4.5L2.47487 3.99985L0.146447 1.67142C-0.0488156 1.47616 -0.0488156 1.15958 0.146447 0.964318C0.341709 0.769056 0.658291 0.769056 0.853553 0.964318Z" fill={mainColor}/>
+    </svg>
+  );
+});
+
+ArrowTip.defaultProps = {
+  color: 'disabled',
+};
+
+const ArrowLine = withTheme(({theme, width, color}) => {
+  const mainColor = theme.palette.text[color];
+  return (
+<svg width={width} height="9" viewBox="0 0 20 9" fill="none" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M20 4L8.74228e-08 4L0 5L20 5L20 4Z" fill={mainColor} />
+</svg>
+
+    );
+  });
+  
+ArrowLine.defaultProps = {
+  color: 'disabled',
+  width: '20',
 };
 
 export default Home;
