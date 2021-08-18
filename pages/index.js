@@ -97,6 +97,7 @@ const Home = withTheme(({theme}) => {
             style={{background: theme.palette.action.hover}}
           >
             <Callout
+              style={{paddingTop: 24, paddingBottom: 24}}
               icon={<WorldIcon />}
               content={
                 <Box paddingX={4}>
