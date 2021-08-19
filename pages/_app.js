@@ -1,17 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import { ThemeProvider } from '@material-ui/core/styles';
 import { useMediaQuery } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import lightTheme, { darkTheme } from '../src/theme';
 import './styles.css'
 
+import * as ga from '../lib/ga';
+
 
 export default function MyApp(props) {
   const isDark = useMediaQuery('(prefers-color-scheme: dark)');
   const themeConfig = isDark ? darkTheme : lightTheme;
   const { Component, pageProps } = props;
+
+  const router = useRouter(); // for Google Analytics
 
   React.useEffect(() => {
     // Remove the server-side injected CSS.
@@ -20,6 +25,21 @@ export default function MyApp(props) {
       jssStyles.parentElement.removeChild(jssStyles);
     }
   }, []);
+
+  React.useEffect(() => {
+    const handleRouteChange = (url) => {
+      ga.pageview(url)
+    }
+    //When the component is mounted, subscribe to router changes
+    //and log those page views
+    router.events.on('routeChangeComplete', handleRouteChange)
+
+    // If the component is unmounted, unsubscribe
+    // from the event with the `off` method
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange)
+    }
+  }, [router.events]);
 
   return (
     <React.Fragment>

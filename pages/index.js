@@ -150,7 +150,7 @@ const Home = withTheme(({theme}) => {
                 <EmailButton
                   variant="outlined"
                   color="primary"
-                  disableElevation={false}
+                  // disableElevation={false}
                   text="joaquinkunkel@gmail.com"
                   // text="j@joaquin.world"
                   icon={<EmailIcon />}
@@ -281,7 +281,7 @@ const EmailButton = withTheme(({theme, simplified, text, icon, variant, color}) 
     ? (
       <IconButton
         size={'small'}
-        disableElevation
+        // disableElevation
         onClick={email}
         color={color}
       >
