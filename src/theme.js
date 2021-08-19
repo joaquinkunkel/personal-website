@@ -49,7 +49,10 @@ const globals = {
       fontWeight: 700,
     },
     subtitle2: {
-      fontFamily: serif,
+      fontFamily: sansSerif,
+      fontWeight: 600,
+      // letterSpacing: 1.1,
+      // textTransform: 'uppercase',
     },
   },
   overrides: {
@@ -84,7 +87,7 @@ export const lightTheme = responsiveFontSizes(createTheme({
     type: 'light',
     text: {
       primary: 'rgba(0, 0, 0, 1)',
-      secondary: '#7167E2',
+      secondary: 'rgba(0, 0, 0, 0.5)',
       disabled: 'rgba(0, 0, 0, 0.45)',
     },
     primary: {
@@ -105,7 +108,7 @@ export const darkTheme = responsiveFontSizes(createTheme({
     type: 'dark',
     text: {
       primary: 'rgba(255, 255, 255, 1)',
-      secondary: '#c578ff',
+      secondary: 'rgba(255, 255, 255, 0.6)',
       disabled: 'rgba(255, 255, 255, 0.5)',
     },
     primary: {

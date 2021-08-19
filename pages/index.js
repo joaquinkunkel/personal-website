@@ -7,6 +7,7 @@ import { AppBar, Toolbar, IconButton, Box, Button, Chip, Divider, Grid, Link, Pa
 import { ThemeProvider } from '@material-ui/core/styles';
 import { lightTheme, darkTheme } from '../src/theme';
 import { withTheme } from '@material-ui/core/styles';
+import Fade from '@material-ui/core/Fade';
 
 const email = () => {
   // window.location.href = "mailto:j@joaquin.world";
@@ -103,8 +104,9 @@ const Home = withTheme(({theme}) => {
           <ArticleLink
             title="Cambly Onboarding"
             subtitle="Improving conversion by making a great first impression"
-            color="#EEBFB4"
+            color="#FFCEBE"
             imgSrc="/case_studies/Welcome Screen.png"
+            fields="UX | Design Systems | Illustration"
             comingSoon
           />
 
@@ -113,6 +115,7 @@ const Home = withTheme(({theme}) => {
             subtitle="Gathering meaningful, actionable feedback from students"
             color="#CBE5E1"
             imgSrc="/case_studies/Tutor Reviews.png"
+            fields="UX | Front-end"
             comingSoon
           />
 
@@ -121,6 +124,7 @@ const Home = withTheme(({theme}) => {
             subtitle="Smoothing the tutor onboarding funnel by briding gaps between our business and its end users"
             color="#EEEEEE"
             imgSrc="/case_studies/Tutor Signup Flow.png"
+            fields="UI | User Flows | Design systems"
             comingSoon
           />
 
@@ -183,7 +187,7 @@ const Hero = withTheme(({theme}) => (
         Hi. I'm&nbsp;
       </Muted>
       <span
-        style={{color: theme.palette.text.secondary}}
+        style={{color: theme.palette.secondary.main}}
       >
         Joaquín Kunkel
       </span>
@@ -332,7 +336,6 @@ const Places = withTheme(({orientation, theme}) => {
         variant="body2"
         noWrap
         color="textSecondary"
-        style={{color: theme.palette.text.disabled}}
       >
         Now
       </Typography>
@@ -375,7 +378,7 @@ const Places = withTheme(({orientation, theme}) => {
   return (
     <div
       ref={containerRef}
-      style={{display: orientation === 'horizontal' && 'flex', alignItems: 'flex-start', width: '100%', flexDirection: orientation === 'vertical' ? 'column' : 'row'}}
+      style={{display: orientation === 'horizontal' && 'flex', alignItems: 'flex-start', width: '100%'}}
     >
       <Place
         text="Abu Dhabi, UAE"
@@ -394,7 +397,8 @@ const Places = withTheme(({orientation, theme}) => {
         }
       />
       {orientation === 'horizontal'
-        &&  arrowContainer
+        ?  arrowContainer
+        : <br />
       }
       <Place
         text="New York, NY"
@@ -414,7 +418,8 @@ const Places = withTheme(({orientation, theme}) => {
         }
       />
       {orientation === 'horizontal'
-        &&  arrowContainer
+        ?  arrowContainer
+        : <br />
       }
       <Place
         text="San Francisco, CA"
@@ -434,7 +439,8 @@ const Places = withTheme(({orientation, theme}) => {
         }
       />
       {orientation === 'horizontal'
-        &&  arrowContainer
+        ?  arrowContainer
+        : <br /> 
       }
       <Place
         text="Mexico City, MX"
@@ -458,9 +464,8 @@ const Place = withTheme(({theme, text, innerRef, strikeThrough, highlight, subti
   >
     <Typography
       variant="subtitle1"
-      color={highlight && 'textSecondary'}
       noWrap
-      style={{textDecoration: strikeThrough && 'line-through'}}
+      style={{textDecoration: strikeThrough && 'line-through', color: highlight && theme.palette.secondary.main}}
     >
       {text}
     </Typography>
@@ -544,45 +549,67 @@ ArrowLine.defaultProps = {
   width: '20',
 };
 
-const ArticleLink = withTheme(({theme, title, subtitle, imgSrc, color, comingSoon}) => {
+const ArticleLink = withTheme(({theme, title, subtitle, imgSrc, color, fields, comingSoon}) => {
+  const [hovering, setHovering] = useState(null);
   return (
     <Block>
-      <div
-        style={{
-          textAlign: 'center',
-          maxHeight: 400,
-          background: color,
-          borderRadius: 4,
-        }}
-      >
-        <img style={{
-          maxHeight: 400,
-          height: 'auto',
-          maxWidth: '100%',
-        }} src={imgSrc} />
-      </div>
-      <br />
-      <Typography variant="h5">
-        {
-          comingSoon &&
-          <>
-            <Chip
-              // color="primary"
-              // variant="outlined"
-              label="WIP"
-              style={{marginRight: 10}}
+      <div onMouseEnter={() => setHovering(true)} onMouseLeave={() => setHovering(false)}>
+        <div
+          style={{
+            textAlign: 'center',
+            maxHeight: 400,
+            borderRadius: 4,
+            position: 'relative',
+          }}
+        >
+            <div
+              style={{borderRadius: 4, position: 'absolute', zIndex: -2, top: 0, left: 0, width: '100%', height: 400, background: color}}
+            />
+          <Fade
+            in={!hovering}
+            timeout={200}
+            >
+            <div
+              style={{borderRadius: 4, position: 'absolute', zIndex: -1, top: 0, left: 0, width: '100%', height: 400, background: theme.palette.action.hover}}
               />
-          </>
-        }
-        {title}
-      </Typography>
-      <Typography
-        variant="h6"
-        // color="textSecondary"
-        style={{color: theme.palette.text.disabled}}
-      >
-        {subtitle}
-      </Typography>
+          </Fade>
+          <img style={{
+            maxHeight: 400,
+            height: 'auto',
+            maxWidth: '100%',
+          }} src={imgSrc} />
+        </div>
+        <br />
+        <Typography variant="h5" gutterBottom>
+          {
+            comingSoon &&
+            <>
+              <Chip
+                // color="primary"
+                // variant="outlined"
+                label="WIP"
+                style={{marginRight: 10}}
+                />
+            </>
+          }
+          {title}
+        </Typography>
+        <Typography
+          variant="h6"
+          // color="textSecondary"
+          style={{color: theme.palette.text.disabled}}
+          gutterBottom
+        >
+          {subtitle}
+        </Typography>
+        <Typography
+          variant="subtitle2"
+          color="textSecondary"
+          gutterBottom
+        >
+          {fields}
+        </Typography>
+    </div>
     </Block>
   );
 });
