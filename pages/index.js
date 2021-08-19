@@ -118,7 +118,7 @@ const Home = withTheme(({theme}) => {
 
           <ArticleLink
             title="Tutor Signup"
-            subtitle="Briding gaps between stakeholders to provide a smoother tutor funnel"
+            subtitle="Smoothing the tutor onboarding funnel by briding gaps between our business and its end users"
             color="#EEEEEE"
             imgSrc="/case_studies/Tutor Signup Flow.png"
             comingSoon
