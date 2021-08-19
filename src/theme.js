@@ -55,17 +55,6 @@ const globals = {
       // textTransform: 'uppercase',
     },
   },
-  overrides: {
-    MuiButton: {
-      root: {
-        textTransform: 'none',
-        fontWeight: 600,
-      },
-      outlined: {
-        
-      },
-    }, 
-  },
 
   props: {
     MuiButtonBase: {
@@ -76,7 +65,7 @@ const globals = {
       color: 'textPrimary',
     },
     MuiLink: {
-      underline: 'always',
+      underline: 'never',
     },
   },
 };
@@ -94,10 +83,33 @@ export const lightTheme = responsiveFontSizes(createTheme({
       main: 'rgba(0, 0, 0, 0.8)',
     },
     secondary: {
-      main: '#7167E2',
+      main: '#9147f2',
     },
     background: {
       default: '#fff',
+    },
+  },
+  overrides: {
+    MuiButton: {
+      root: {
+        textTransform: 'none',
+        fontWeight: 600,
+      },
+      outlined: {
+        
+      },
+    }, 
+    MuiLink: {
+      root: {
+        '&:hover': {
+          background: 'rgba(145, 71, 242, 0.1)',
+        },
+        borderRadius: 8,
+        padding: 5,
+        margin: -5,
+        textDecoration: 'none',
+        transition: '0.2s all',
+      },
     },
   },
 }));
@@ -119,6 +131,29 @@ export const darkTheme = responsiveFontSizes(createTheme({
     },
     background: {
       default: '#000',
+    },
+  },
+  overrides: {
+    MuiButton: {
+      root: {
+        textTransform: 'none',
+        fontWeight: 600,
+      },
+      outlined: {
+        
+      },
+    }, 
+    MuiLink: {
+      root: {
+        '&:hover': {
+          background: 'rgba(197, 120, 255, 0.4)',
+        },
+        borderRadius: 8,
+        padding: 5,
+        margin: -5,
+        textDecoration: 'none',
+        transition: '0.2s all',
+      },
     },
   },
 }));
