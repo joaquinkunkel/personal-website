@@ -1,4 +1,3 @@
-import HomeHead from './HomeHead';
 import NavBar from './NavBar';
 import useScrollPosition from '@react-hook/window-scroll';
 import EmailButton from './EmailButton';
@@ -29,7 +28,6 @@ const Home = withTheme(({theme}) => {
   return (
     <>
       {/* CSS imports and meta tags go in HomeHead */}
-      <HomeHead /> 
       <NavBar />
 
         <Grid container spacing={10} style={{paddingTop: '5vh', width: '100%', margin: 0}}>
@@ -48,6 +46,7 @@ const Home = withTheme(({theme}) => {
             color="#FFCEBE"
             imgSrc="/case_studies/Welcome Screen.png"
             fields="UX | Design Systems | Illustration"
+            href="/posts/cambly-onboarding"
             comingSoon
           />
 
