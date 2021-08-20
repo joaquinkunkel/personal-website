@@ -15,6 +15,7 @@ const Hero = withTheme(({theme}) => (
       ,<br/>
       <span style={{whiteSpace: 'pre'}}>product designer</span> with an engineering background.
     </Typography>
+    <span style={{color: theme.palette.text.disabled}}><br/>(Or is it the other way around?)</span>
   </Box>
 ));
 

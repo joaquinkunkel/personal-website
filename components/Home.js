@@ -45,7 +45,7 @@ const Home = withTheme(({theme}) => {
               content={
                 <Box padding={1}>
                   <Typography variant="body2" color="textSecondary">
-                    This website is a work in progress. I'm building it in NextJS.&nbsp;
+                    This website is a work in progress. I'm building it using NextJS and Material-UI.&nbsp;
                     <Link color="secondary" href="https://github.com/joaquinkunkel/personal-website">See it on GitHub</Link> if curious!
                   </Typography>
                 </Box>
