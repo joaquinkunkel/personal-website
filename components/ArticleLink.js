@@ -18,7 +18,7 @@ const ArticleLink = withTheme(({
   const [hovering, setHovering] = useState(null);
   return (
     <Block>
-      <Link href={href || '#'}>
+      <Link href={href || '#'} scroll={!!href}>
         <div onMouseEnter={() => setHovering(true)} onMouseLeave={() => setHovering(false)}>
           <ArticleHeader
             title={title}

@@ -34,8 +34,7 @@ const ArticleHeader = withTheme(({
     </Typography>
     <Typography
       variant="h6"
-      // color="textSecondary"
-      style={{color: theme.palette.text.disabled}}
+      color="textSecondary"
       gutterBottom
     >
       {subtitle}

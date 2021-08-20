@@ -5,6 +5,8 @@ import ArticleLink from './ArticleLink';
 import Block from './Block';
 import Callout from './Callout';
 import Places from './Places';
+import Hero from './Hero';
+
 import {
   WorldIcon,
   EmailIcon,
@@ -36,6 +38,19 @@ const Home = withTheme(({theme}) => {
           </Block>
           <Block>
             <ValueProp />
+            <br />
+            <Callout
+              // style={{borderRadius: 4, background: theme.palette.action.hover, padding: 8}}
+              icon={<WorldIcon color="primary" />}
+              content={
+                <Box padding={1}>
+                  <Typography variant="body2" color="textSecondary">
+                    This website is a work in progress. I'm building it in NextJS.&nbsp;
+                    <Link color="secondary" href="https://github.com/joaquinkunkel/personal-website">See it on GitHub</Link> if curious!
+                  </Typography>
+                </Box>
+              }
+              />
           </Block>
           
           {/* Case studies */}
@@ -67,57 +82,10 @@ const Home = withTheme(({theme}) => {
             fields="UI | User Flows | Design systems"
             comingSoon
           />
-
-          <Block
-            maxWidth={isMedium ? 'xl': 'md'}
-            style={{paddingLeft: 20, paddingRight: 20, background: theme.palette.action.hover, borderTop: `2px solid ${theme.palette.divider}`, borderBottom: `2px solid ${theme.palette.divider}`}}
-          >
-            <Callout
-              style={{paddingTop: 80, paddingBottom: 80}}
-              icon={<WorldIcon />}
-              content={
-                <Box paddingX={4}>
-                  <Places orientation={!isMedium ? 'vertical' : 'horizontal'} />
-                </Box>
-              }
-              />
-          </Block>
-          <Block>
-            <Bio />
-          </Block>
-          <Block>
-            <Callout
-              content={
-                <EmailButton
-                  variant="outlined"
-                  color="primary"
-                  text="j@joaquin.world"
-                  icon={<EmailIcon />}
-                />}
-              caption="Let’s chat about design, eng, music, art, or life."
-            />
-          </Block>
         </Grid>
     </>
   );
 });
-
-const Hero = withTheme(({theme}) => (
-  <Box paddingTop={0}>
-    <Typography
-      variant="h3"
-    >
-      Hi. I'm&nbsp;
-      <span
-        style={{color: theme.palette.secondary.main}}
-      >
-        Joaquín Kunkel
-      </span>
-      ,<br/>
-      <span style={{whiteSpace: 'pre'}}>product designer</span> with an engineering background.
-    </Typography>
-  </Box>
-));
 
 const ValueProp = () => (
   <Box>
@@ -128,15 +96,6 @@ const ValueProp = () => (
     </Typography>
   </Box>
 );
-
-const Bio = () => (
-  <Box>
-    <Typography variant="h6">
-      I'm currently working as a freelance designer in my hometown. Before this, I owned product design at <Link rel="noopener" color="secondary" target="_blank" href="http://cambly.com">Cambly</Link>. I studied Computer Science and Visual Arts at <Link target="_blank" rel="noopener" color="secondary" href="https://nyuad.nyu.edu/">NYU Abu Dhabi</Link>.
-    </Typography>
-  </Box>
-);
-
   
-  export default Home;
+export default Home;
   
