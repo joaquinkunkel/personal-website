@@ -112,7 +112,7 @@ const Places = withTheme(({orientation, theme}) => {
         subtitle={
           <>
             <Typography noWrap variant="body2" style={{color: theme.palette.text.disabled}}>
-              2019-2020
+              2019-2021
             </Typography>
             <Typography noWrap variant="body2">
               Product Design
