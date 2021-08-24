@@ -1,19 +1,15 @@
 import NavBar from './NavBar';
-import EmailButton from './EmailButton';
 import ArticleLink from './ArticleLink';
 import Block from './Block';
 import Callout from './Callout';
 import Hero from './Hero';
-import Slide from '@material-ui/core';
-
+import StyledLink from './StyledLink';
 import {
   WorldIcon,
-  EmailIcon,
 } from './icons/Icons';
 import {
   Box,
   Grid,
-  Link,
   Typography,
   useMediaQuery,
 } from '@material-ui/core';
@@ -77,7 +73,7 @@ const Home = withTheme(({theme}) => {
                 <Box padding={1}>
                   <Typography variant="body2" color="textSecondary">
                     This website is a work in progress. I'm building it using NextJS and Material-UI.&nbsp;
-                    <Link color="secondary" href="https://github.com/joaquinkunkel/personal-website">See it on GitHub</Link> if curious!
+                    <StyledLink href="https://github.com/joaquinkunkel/personal-website">See it on GitHub</StyledLink> if curious!
                   </Typography>
                 </Box>
               }
@@ -89,16 +85,21 @@ const Home = withTheme(({theme}) => {
   );
 });
 
-const ValueProp = () => (
-  <Box>
-    <Typography variant="h6">
-      I write code, build design systems, and put user empathy above all.
-      <br />
-      {/* I work for high impact and elevated craft.<br /> */}
-      I'm also a visual artist.
-    </Typography>
-  </Box>
-);
-  
+const ValueProp = withTheme(({theme}) => {
+  return (
+    <Box>
+      <Typography variant="h6">
+        I believe in a culture of user empathy, artistic creativity, and craft.
+        <br />
+        {/* I work for high impact and elevated craft.<br /> */}
+        I'm also a&nbsp;
+        <StyledLink href="/art">
+          visual artist.
+        </StyledLink>
+      </Typography>
+    </Box>
+  );
+});
+
 export default Home;
   

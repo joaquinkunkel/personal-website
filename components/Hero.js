@@ -4,18 +4,18 @@ import { withTheme } from "@material-ui/core/styles";
 const Hero = withTheme(({theme}) => (
   <Box paddingTop={0}>
     <Typography
-      variant="h2"
-      color="textSecondary"
+      variant="h6"
+      // color="textSecondary"
     >
       Hi. I'm&nbsp;
-      <Typography variant="h2" component="span" color="textPrimary">
+      <Typography variant="h6" component="span" color="textPrimary">
       {/* <span
         style={{color: theme.palette.secondary.main}}
       > */}
-        Joaquín Kunkel
+        Joaquín
       </Typography>
-      ,<br/>
-      <span style={{whiteSpace: 'pre'}}>product designer</span><br /><span style={{color: theme.palette.text.disabled}}>with an engineering background.</span>
+      .<br />
+      I'm a product designer with an engineering background.
     </Typography>
     {/* <span style={{color: theme.palette.text.disabled}}><br/>(Or is it the other way around?)</span> */}
   </Box>

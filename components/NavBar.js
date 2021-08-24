@@ -38,7 +38,7 @@ const NavBar = withTheme(({theme, fixed, alwaysShowName}) => {
       elevation={0}
       color="white"
       style={{
-        borderBottom: fixed && `1px solid ${theme.palette.divider}`,
+        borderBottom: scrollY > 10 && fixed && `1px solid ${theme.palette.divider}`,
         background: theme.palette.background.paper,
         backdropFilter: 'blur(30px)',
       }}
@@ -48,7 +48,7 @@ const NavBar = withTheme(({theme, fixed, alwaysShowName}) => {
         <Box display="flex" alignItems="center" marginRight="auto">
           <Link href="/">
             <Fade in={showName} timeout={200}>
-                <Typography variant="subtitle2" style={{cursor: 'pointer'}}>
+                <Typography variant="body1" style={{cursor: 'pointer'}}>
                   Joaquín Kunkel
                 </Typography>
             </Fade>

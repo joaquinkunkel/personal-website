@@ -8,6 +8,7 @@ import { withTheme } from "@material-ui/core/styles";
 import { WorldIcon, EmailIcon } from "../components/icons/Icons";
 import Hero from "../components/Hero";
 import EmailButton from "../components/EmailButton";
+import StyledLink from "../components/StyledLink";
 
 const About = withTheme(({theme}) => {
   const isMedium = useMediaQuery(theme.breakpoints.up('md'));
@@ -55,8 +56,8 @@ const About = withTheme(({theme}) => {
 
 const Bio = () => (
   <Box>
-    <Typography variant="h6">
-      I'm currently working as a freelance designer in my hometown. Before this, I owned product design at <Link rel="noopener" color="secondary" target="_blank" href="http://cambly.com">Cambly</Link>. I studied Computer Science and Visual Arts at <Link target="_blank" rel="noopener" color="secondary" href="https://nyuad.nyu.edu/">NYU Abu Dhabi</Link>.
+    <Typography variant="h6" color="textSecondary">
+      I'm currently working as a freelance designer in my hometown.<br /> Before this, I owned product design at <StyledLink rel="noopener" target="_blank" href="http://cambly.com">Cambly</StyledLink>. I studied Computer Science and Visual Arts at <StyledLink target="_blank" rel="noopener" href="https://nyuad.nyu.edu/">NYU Abu Dhabi</StyledLink>.
     </Typography>
   </Box>
 );

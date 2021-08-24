@@ -1,9 +1,10 @@
-import { Box, Divider, Link, Typography } from "@material-ui/core";
+import { Box, Divider, Typography } from "@material-ui/core";
 import ArticleHeader from "../../components/ArticleHeader";
 import ArticleSummary from '../../components/ArticleSummary';
 import Block from "../../components/Block";
 import NavBar from "../../components/NavBar";
 import { Arrow } from '../../components/icons/Icons';
+import StyledLink from "../../components/StyledLink";
 
 const CamblyOnboarding = () => (
   <>
@@ -66,7 +67,7 @@ const CamblyOnboarding = () => (
       <Box paddingY={2}>
         <Typography variant="body2" color="textSecondary">
           This case study is a work in progress! Coming soon.
-          In the meantime, feel free to email me at <Link color="secondary" target="_blank" href="mailto:j@joaquin.world">j@joaquin.world</Link> if you're interested in walking through this project together.
+          In the meantime, feel free to email me at <StyledLink target="_blank" href="mailto:j@joaquin.world">j@joaquin.world</StyledLink> if you're interested in walking through this project together.
         </Typography>
       </Box>
     </Block>
