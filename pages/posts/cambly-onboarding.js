@@ -37,7 +37,7 @@ const CamblyOnboarding = () => (
         }
         solution={
           <Typography variant="body2" color="textSecondary" component="span">
-            We developed an onboarding flow that&nbsp;
+            An onboarding flow that&nbsp;
             <Typography variant="body2" component="span" color="textPrimary">
               surfaces value props specific to the user's goal
             </Typography>
@@ -47,8 +47,8 @@ const CamblyOnboarding = () => (
         impact={
           <Typography variant="body2" color="textSecondary" component="span">
             {/* 3% <Arrow color="secondary" /> 3.3%<br/> */}
-            <Typography variant="body2" component="span" color="textPrimary">Conversion rate increased 1.2x </Typography>
-            because a more personalized flow outweighs the friction it may introduce.
+            <Typography variant="body2" component="span" color="textPrimary">Conversion rate up 1.2x<br/></Typography>
+            A more personalized flow outweighs the friction it may introduce.
           </Typography>
         }
         team={<>
