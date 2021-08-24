@@ -3,6 +3,7 @@ import ArticleHeader from "../../components/ArticleHeader";
 import ArticleSummary from '../../components/ArticleSummary';
 import Block from "../../components/Block";
 import NavBar from "../../components/NavBar";
+import { Arrow } from '../../components/icons/Icons';
 
 const CamblyOnboarding = () => (
   <>
@@ -27,13 +28,38 @@ const CamblyOnboarding = () => (
     <Box height={40} />
     <Block>
       <ArticleSummary
-        problem="How can we get new users excited about achieving their goals with our product?"
-        solution="A redesigned welcome screen and a conversational flow responding to users' specific needs."
-        impact="Conversion rate increased by ~20%."
+        problem={
+          <Typography variant="body2" color="textSecondary" component="span">
+            How can we&nbsp;
+            <Typography variant="body2" component="span" color="textPrimary">
+              address <Typography variant="body" component="span" noWrap>pre-conversion</Typography> dropoff&nbsp;
+            </Typography>
+            in our onboarding flow?
+          </Typography>
+        }
+        solution={
+          <Typography variant="body2" color="textSecondary" component="span">
+            We developed an onboarding flow that&nbsp;
+            <Typography variant="body2" component="span" color="textPrimary">
+              surfaces value props specific to the user's goal
+            </Typography>
+            .
+          </Typography>
+        }
+        impact={
+          <Typography variant="body2" color="textSecondary" component="span">
+            <Typography variant="h5" component="span" color="textPrimary">
+              1.2x<br />
+            </Typography>
+            {/* 3% <Arrow color="secondary" /> 3.3%<br/> */}
+            <Typography variant="body2" component="span" color="textPrimary">Conversion rate </Typography>
+            increased because a more personalized flow outweighs the friction it may introduce.
+          </Typography>
+        }
         team={<>
-          <>Product Designer (me),</>
+          <>a Product Designer (me),</>
           <br />
-          <>Product Manager,</>
+          <>a Product Manager,</>
           <br />
           <>2 Engineers (iOS & Web)</>
           </>
