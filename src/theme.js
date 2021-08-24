@@ -46,6 +46,7 @@ const globals = {
       fontFamily: serif,
     },
     body2: {
+      lineHeight: 1.6,
       fontFamily: serif,
     },
     subtitle1: {
@@ -91,6 +92,7 @@ export const lightTheme = responsiveFontSizes(createTheme({
     },
     background: {
       default: '#fff',
+      paper: 'rgba(255, 255, 255, 0.4)',
     },
   },
   overrides: {
@@ -135,6 +137,7 @@ export const darkTheme = responsiveFontSizes(createTheme({
     },
     background: {
       default: '#000',
+      paper: 'rgba(0, 0, 0, 0.7)',
     },
   },
   overrides: {

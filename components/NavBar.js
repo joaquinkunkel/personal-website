@@ -16,7 +16,7 @@ import { withTheme } from '@material-ui/core/styles';
 import EmailButton from './EmailButton';
 
 
-const NavBar = withTheme(({theme}) => {
+const NavBar = withTheme(({theme, fixed}) => {
   const StyledLink = styled.a`
     color: ${theme.palette.text.primary};
     cursor: pointer;
@@ -26,12 +26,18 @@ const NavBar = withTheme(({theme}) => {
     &:hover {
       background: ${theme.palette.action.hover};
     }
-  `
+  `;
+
   return (
     <AppBar
-      position="static"
+      position={fixed ? 'sticky' : 'static'}
       elevation={0}
-      color="transparent"
+      color="white"
+      style={{
+        borderBottom: fixed && `1px solid ${theme.palette.divider}`,
+        background: theme.palette.background.paper,
+        backdropFilter: 'blur(30px)',
+      }}
     >
     <Toolbar>
       <Container maxWidth="lg" style={{display: 'flex', justifyContent: 'flex-end'}}>
@@ -61,5 +67,9 @@ const NavBar = withTheme(({theme}) => {
     </AppBar>
   );
 });
+
+NavBar.defaultProps = {
+  fixed: false,
+};
 
 export default NavBar;

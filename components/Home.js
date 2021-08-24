@@ -57,6 +57,7 @@ const Home = withTheme(({theme}) => {
             color="#CBE5E1"
             imgSrc="/case_studies/Tutor Reviews.png"
             fields="UX | Front-end"
+            href="/posts/tutor-reviews"
             comingSoon
           />
 
@@ -65,7 +66,7 @@ const Home = withTheme(({theme}) => {
             subtitle="Smoothing the tutor onboarding funnel by briding gaps between our business and its end users"
             color="#EEEEEE"
             imgSrc="/case_studies/Tutor Signup Flow.png"
-            fields="UI | User Flows | Design systems"
+            href="/posts/tutor-signup"
             comingSoon
           />
 

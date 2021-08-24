@@ -1,4 +1,4 @@
-import { Box, Divider, Typography } from "@material-ui/core";
+import { Box, Divider, Link, Typography } from "@material-ui/core";
 import ArticleHeader from "../../components/ArticleHeader";
 import ArticleSummary from '../../components/ArticleSummary';
 import Block from "../../components/Block";
@@ -7,8 +7,7 @@ import { Arrow } from '../../components/icons/Icons';
 
 const CamblyOnboarding = () => (
   <>
-    <NavBar/>
-    <Block maxWidth="none">
+    <NavBar fixed />
       {/* TODO: Reorganize so homehead isn't required in all components */}
       <ArticleHeader
         size="large"
@@ -20,7 +19,6 @@ const CamblyOnboarding = () => (
         href="/posts/cambly-onboarding"
         comingSoon
       />
-    </Block>
     <Box height={16} />
     <Block>
       <Divider />
@@ -48,12 +46,9 @@ const CamblyOnboarding = () => (
         }
         impact={
           <Typography variant="body2" color="textSecondary" component="span">
-            <Typography variant="h5" component="span" color="textPrimary">
-              1.2x<br />
-            </Typography>
             {/* 3% <Arrow color="secondary" /> 3.3%<br/> */}
-            <Typography variant="body2" component="span" color="textPrimary">Conversion rate </Typography>
-            increased because a more personalized flow outweighs the friction it may introduce.
+            <Typography variant="body2" component="span" color="textPrimary">Conversion rate increased 1.2x </Typography>
+            because a more personalized flow outweighs the friction it may introduce.
           </Typography>
         }
         team={<>
@@ -71,6 +66,7 @@ const CamblyOnboarding = () => (
       <Box paddingY={2}>
         <Typography variant="body2" color="textSecondary">
           This case study is a work in progress! Coming soon.
+          In the meantime, feel free to <Link color="secondary" target="_blank" href="mailto:j@joaquin.world">email me at j@joaquin.world</Link> if you're interested in walking through this project together.
         </Typography>
       </Box>
     </Block>

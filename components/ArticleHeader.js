@@ -51,7 +51,7 @@ const ArticleHeader = withTheme(({
               comingSoon &&
                 <>
                   <Chip
-                    label="WIP"
+                    label={size === 'large' ? 'Work in progress' : 'WIP'}
                     size={size}
                     style={{marginTop: 16}}
                     />
