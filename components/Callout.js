@@ -8,7 +8,7 @@ const Callout = ({icon, content, caption, color, rightAlign, style}) => (
       <Box paddingY={0.5}>
         {icon}
       </Box>
-      <Box style={{width: '100%'}}>
+      <Box style={{width: '100%', paddingTop: '2px'}}>
         {content}
       </Box>
     </Box>

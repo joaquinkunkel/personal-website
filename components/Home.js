@@ -4,7 +4,6 @@ import EmailButton from './EmailButton';
 import ArticleLink from './ArticleLink';
 import Block from './Block';
 import Callout from './Callout';
-import Places from './Places';
 import Hero from './Hero';
 
 import {
@@ -38,19 +37,6 @@ const Home = withTheme(({theme}) => {
           </Block>
           <Block>
             <ValueProp />
-            <br />
-            <Callout
-              // style={{borderRadius: 4, background: theme.palette.action.hover, padding: 8}}
-              icon={<WorldIcon color="primary" />}
-              content={
-                <Box padding={1}>
-                  <Typography variant="body2" color="textSecondary">
-                    This website is a work in progress. I'm building it using NextJS and Material-UI.&nbsp;
-                    <Link color="secondary" href="https://github.com/joaquinkunkel/personal-website">See it on GitHub</Link> if curious!
-                  </Typography>
-                </Box>
-              }
-              />
           </Block>
           
           {/* Case studies */}
@@ -82,6 +68,22 @@ const Home = withTheme(({theme}) => {
             fields="UI | User Flows | Design systems"
             comingSoon
           />
+
+          <Block highlight>
+            <Callout
+              // style={{borderRadius: 4, background: theme.palette.action.hover, padding: 8}}
+              icon={<WorldIcon color="primary" />}
+              content={
+                <Box padding={1}>
+                  <Typography variant="body2" color="textSecondary">
+                    This website is a work in progress. I'm building it using NextJS and Material-UI.&nbsp;
+                    <Link color="secondary" href="https://github.com/joaquinkunkel/personal-website">See it on GitHub</Link> if curious!
+                  </Typography>
+                </Box>
+              }
+            />
+          </Block>
+          
         </Grid>
     </>
   );
@@ -90,8 +92,8 @@ const Home = withTheme(({theme}) => {
 const ValueProp = () => (
   <Box>
     <Typography variant="h6">
-      I write code, build design systems, and empower teams to ask
-      the right questions. I work for high impact and elevated craft.
+      I write code, build design systems, and put empathy at the forefront of product thinking.
+      I work for high impact and elevated craft.<br />
       I'm also a visual artist.
     </Typography>
   </Box>

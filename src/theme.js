@@ -8,7 +8,7 @@ const globals = {
     values: {
       xs: 450,
       sm: 720,
-      md: 960,
+      md: 900,
       lg: 1200,
       xl: 1800,
     },
@@ -20,20 +20,24 @@ const globals = {
     fontSize: 14,
     fontFamily: sansSerif,
     h2: {
-      fontFamily: serif,
-      fontSize: 60,
+      fontFamily: sansSerif,
+      fontSize: 45,
+      fontWeight: 600,
     },
     h3: {
       // fontFamily: ['Agrandir', sansSerif].join(','),
       fontFamily: sansSerif,
-      fontWeight: 600,
-      fontSize: 50,
+      lineHeight: 1.3,
+      fontWeight: 700,
+      fontSize: 48,
       // textTransform: 'uppercase',
     },
     h5: {
+      fontFamily: sansSerif,
       fontWeight: 600,
     },
     h6: {
+      fontFamily: serif,
       fontFamily: serif,
       fontSize: 18,
       lineHeight: 2,

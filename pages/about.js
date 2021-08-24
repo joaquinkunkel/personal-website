@@ -23,8 +23,8 @@ const About = withTheme(({theme}) => {
           <Bio />
         </Block>
         <Block
+          highlight
           maxWidth={isMedium ? 'xl': 'md'}
-          style={{paddingLeft: 20, paddingRight: 20, background: theme.palette.action.hover, borderTop: `2px solid ${theme.palette.divider}`, borderBottom: `2px solid ${theme.palette.divider}`}}
         >
           <Callout
             style={{paddingTop: 80, paddingBottom: 80}}

@@ -4,6 +4,7 @@ import Link from 'next/link';
 import ArticleHeader from './ArticleHeader';
 import { withTheme } from '@material-ui/core/styles';
 import Fade from '@material-ui/core/Fade';
+import styled from 'styled-components';
 
 const ArticleLink = withTheme(({
   theme,
@@ -16,9 +17,13 @@ const ArticleLink = withTheme(({
   href,
 }) => {
   const [hovering, setHovering] = useState(null);
+  const HoverLink = styled.a`
+    cursor: ${href && 'pointer'};
+    width: 100%;
+  `
   return (
-    <Block style={{cursor: href && 'pointer'}}>
-      <Link href={href || '#'} scroll={!!href}>
+    <Link href={href || '#'} scroll={!!href}>
+      <HoverLink>
         <div onMouseEnter={() => setHovering(true)} onMouseLeave={() => setHovering(false)}>
           <ArticleHeader
             title={title}
@@ -49,8 +54,8 @@ const ArticleLink = withTheme(({
             }
           />
         </div>
-      </Link>
-    </Block>
+      </HoverLink>
+    </Link>
   );
 });
 
