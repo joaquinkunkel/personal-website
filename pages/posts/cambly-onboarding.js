@@ -7,7 +7,7 @@ import { Arrow } from '../../components/icons/Icons';
 
 const CamblyOnboarding = () => (
   <>
-    <NavBar fixed />
+    <NavBar fixed alwaysShowName />
       {/* TODO: Reorganize so homehead isn't required in all components */}
       <ArticleHeader
         size="large"
@@ -66,7 +66,7 @@ const CamblyOnboarding = () => (
       <Box paddingY={2}>
         <Typography variant="body2" color="textSecondary">
           This case study is a work in progress! Coming soon.
-          In the meantime, feel free to <Link color="secondary" target="_blank" href="mailto:j@joaquin.world">email me at j@joaquin.world</Link> if you're interested in walking through this project together.
+          In the meantime, feel free to email me at <Link color="secondary" target="_blank" href="mailto:j@joaquin.world">j@joaquin.world</Link> if you're interested in walking through this project together.
         </Typography>
       </Box>
     </Block>

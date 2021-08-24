@@ -14,7 +14,7 @@ const About = withTheme(({theme}) => {
 
   return (
     <>
-    <NavBar />
+    <NavBar fixed />
     <Grid container spacing={10} style={{paddingTop: '5vh', width: '100%', margin: 0}}>
       <Block>
         <Hero />

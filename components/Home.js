@@ -1,10 +1,10 @@
 import NavBar from './NavBar';
-import useScrollPosition from '@react-hook/window-scroll';
 import EmailButton from './EmailButton';
 import ArticleLink from './ArticleLink';
 import Block from './Block';
 import Callout from './Callout';
 import Hero from './Hero';
+import Slide from '@material-ui/core';
 
 import {
   WorldIcon,
@@ -20,8 +20,6 @@ import {
 import { withTheme } from '@material-ui/core/styles';
 
 const Home = withTheme(({theme}) => {
-  const scrollY = useScrollPosition(60);
-  const showNav = scrollY > 200;
   const isSmall = !(useMediaQuery(theme.breakpoints.up('sm')));
   const isMedium = useMediaQuery(theme.breakpoints.up('md'));
   const isLarge = useMediaQuery(theme.breakpoints.up('lg'));
@@ -29,7 +27,7 @@ const Home = withTheme(({theme}) => {
   return (
     <>
       {/* CSS imports and meta tags go in HomeHead */}
-      <NavBar />
+      <NavBar fixed />
 
         <Grid container spacing={10} style={{paddingTop: '5vh', width: '100%', margin: 0}}>
           <Block>
@@ -38,6 +36,7 @@ const Home = withTheme(({theme}) => {
           <Block>
             <ValueProp />
           </Block>
+          <Block />
           
           {/* Case studies */}
 
@@ -93,8 +92,9 @@ const Home = withTheme(({theme}) => {
 const ValueProp = () => (
   <Box>
     <Typography variant="h6">
-      I write code, build design systems, and put empathy at the forefront of product thinking.
-      I work for high impact and elevated craft.<br />
+      I write code, build design systems, and put user empathy above all.
+      <br />
+      {/* I work for high impact and elevated craft.<br /> */}
       I'm also a visual artist.
     </Typography>
   </Box>

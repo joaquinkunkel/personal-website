@@ -6,17 +6,21 @@ import {
   Typography,
 } from '@material-ui/core';
 import Link from 'next/link';
+import useScrollPosition from '@react-hook/window-scroll';
 import {
   EmailIcon,
 } from './icons/Icons';
 import styled from 'styled-components';
 
 import { withTheme } from '@material-ui/core/styles';
-
+import { Fade, Slide } from '@material-ui/core';
 import EmailButton from './EmailButton';
 
 
-const NavBar = withTheme(({theme, fixed}) => {
+const NavBar = withTheme(({theme, fixed, alwaysShowName}) => {
+  const scrollY = useScrollPosition(30);
+  const showName = alwaysShowName || scrollY > 100;
+
   const StyledLink = styled.a`
     color: ${theme.palette.text.primary};
     cursor: pointer;
@@ -39,9 +43,18 @@ const NavBar = withTheme(({theme, fixed}) => {
         backdropFilter: 'blur(30px)',
       }}
     >
-    <Toolbar>
-      <Container maxWidth="lg" style={{display: 'flex', justifyContent: 'flex-end'}}>
-        <Box display="flex" alignItems="center">
+    <Toolbar style={{padding: 0}}>
+      <Container maxWidth="md" style={{display: 'flex'}}>
+        <Box display="flex" alignItems="center" marginRight="auto">
+          <Link href="/">
+            <Fade in={showName} timeout={200}>
+                <Typography variant="subtitle2" style={{cursor: 'pointer'}}>
+                  Joaquín Kunkel
+                </Typography>
+            </Fade>
+          </Link>
+        </Box>
+        <Box display="flex" alignItems="center" marginLeft="auto">
         <EmailButton
           simplified
           // text={!isMedium ? '' : 'j@joaquin.world'}
@@ -70,6 +83,7 @@ const NavBar = withTheme(({theme, fixed}) => {
 
 NavBar.defaultProps = {
   fixed: false,
+  alwaysShowName: false,
 };
 
 export default NavBar;

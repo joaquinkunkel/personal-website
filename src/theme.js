@@ -56,6 +56,7 @@ const globals = {
     subtitle2: {
       fontFamily: sansSerif,
       fontWeight: 600,
+      fontSize: 20,
       // letterSpacing: 1.1,
       // textTransform: 'uppercase',
     },
@@ -82,7 +83,7 @@ export const lightTheme = responsiveFontSizes(createTheme({
     text: {
       primary: 'rgba(0, 0, 0, 1)',
       secondary: 'rgba(0, 0, 0, 0.5)',
-      disabled: 'rgba(0, 0, 0, 0.45)',
+      disabled: 'rgba(0, 0, 0, 0.4)',
     },
     primary: {
       main: 'rgba(0, 0, 0, 0.8)',
@@ -127,7 +128,7 @@ export const darkTheme = responsiveFontSizes(createTheme({
     text: {
       primary: 'rgba(255, 255, 255, 1)',
       secondary: 'rgba(255, 255, 255, 0.6)',
-      disabled: 'rgba(255, 255, 255, 0.5)',
+      disabled: 'rgba(255, 255, 255, 0.4)',
     },
     primary: {
       main: 'rgba(255, 255, 255, 0.85)',
