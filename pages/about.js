@@ -57,7 +57,7 @@ const About = withTheme(({theme}) => {
 const Bio = () => (
   <Box>
     <Typography variant="h6" color="textSecondary">
-      I'm currently working as a freelance designer in my hometown.<br /> Before this, I owned product design at <StyledLink rel="noopener" target="_blank" href="http://cambly.com">Cambly</StyledLink>. I studied Computer Science and Visual Arts at <StyledLink target="_blank" rel="noopener" href="https://nyuad.nyu.edu/">NYU Abu Dhabi</StyledLink>.
+      I'm currently working as a freelance designer in my hometown, Mexico City.<br /> Before this, I owned product design at <StyledLink rel="noopener" target="_blank" href="http://cambly.com">Cambly</StyledLink>, a language tutoring platform. I studied Computer Science and Visual Arts at <StyledLink target="_blank" rel="noopener" href="https://nyuad.nyu.edu/">NYU Abu Dhabi</StyledLink>, a global liberal arts college.
     </Typography>
   </Box>
 );

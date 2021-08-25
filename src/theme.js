@@ -95,6 +95,10 @@ export const lightTheme = responsiveFontSizes(createTheme({
       default: '#fff',
       paper: 'rgba(255, 255, 255, 0.4)',
     },
+    action: {
+      hover: 'rgba(0, 0, 0, 0.08)',
+      focus: 'rgba(0, 0, 0, 0.12)',
+    },
   },
   overrides: {
     MuiButton: {
@@ -139,6 +143,10 @@ export const darkTheme = responsiveFontSizes(createTheme({
     background: {
       default: '#000',
       paper: 'rgba(0, 0, 0, 0.7)',
+    },
+    action: {
+      hover: 'rgba(255, 255, 255, 0.15)',
+      focus: 'rgba(255, 255, 255, 0.2)',
     },
   },
   overrides: {

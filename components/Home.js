@@ -89,7 +89,7 @@ const ValueProp = withTheme(({theme}) => {
   return (
     <Box>
       <Typography variant="h6">
-        I believe in a culture of user empathy, artistic creativity, and craft.
+        I believe in a culture of user empathy, artistic creativity, and contextual awareness.
         <br />
         {/* I work for high impact and elevated craft.<br /> */}
         I'm also a&nbsp;
