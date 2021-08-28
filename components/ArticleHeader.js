@@ -58,7 +58,7 @@ const ArticleHeader = withTheme(({
           <Grid item="12" md={md}>
             <Typography
               variant="body1"
-              // color="textSecondary"
+              color="textSecondary"
               gutterBottom
               >
               {subtitle}

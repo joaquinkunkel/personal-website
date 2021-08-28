@@ -4,6 +4,7 @@ import {
   Box,
   Container,
   Typography,
+  useMediaQuery,
 } from '@material-ui/core';
 import Link from 'next/link';
 import useScrollPosition from '@react-hook/window-scroll';
@@ -18,6 +19,7 @@ import EmailButton from './EmailButton';
 
 
 const NavBar = withTheme(({theme, fixed, alwaysShowName}) => {
+  const isSmall = !(useMediaQuery(theme.breakpoints.up('sm')));
   const scrollY = useScrollPosition(30);
   const showName = alwaysShowName || scrollY > 100;
 
@@ -38,8 +40,8 @@ const NavBar = withTheme(({theme, fixed, alwaysShowName}) => {
       elevation={0}
       color="white"
       style={{
-        borderBottom: scrollY > 10 && fixed && `1px solid ${theme.palette.divider}`,
-        background: theme.palette.background.paper,
+        // borderBottom: scrollY > 10 && fixed && `1px solid ${theme.palette.divider}`,
+        background: theme.palette.background[isSmall ? 'default' : 'paper'],
         backdropFilter: 'blur(30px)',
       }}
     >

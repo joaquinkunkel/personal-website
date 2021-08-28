@@ -88,7 +88,7 @@ const Home = withTheme(({theme}) => {
 const ValueProp = withTheme(({theme}) => {
   return (
     <Box>
-      <Typography variant="h6">
+      <Typography variant="h6" color="textSecondary">
         I believe in a culture of user empathy, artistic creativity, and contextual awareness.
         <br />
         {/* I work for high impact and elevated craft.<br /> */}
@@ -102,4 +102,3 @@ const ValueProp = withTheme(({theme}) => {
 });
 
 export default Home;
-  
