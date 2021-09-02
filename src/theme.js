@@ -29,7 +29,7 @@ const globals = {
       fontFamily: sansSerif,
       lineHeight: 1.3,
       fontWeight: 700,
-      fontSize: 48,
+      fontSize: 40,
       // textTransform: 'uppercase',
     },
     h5: {

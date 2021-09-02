@@ -35,8 +35,7 @@ const Home = withTheme(({theme}) => {
           </Block>
           <Block>
             <ValueProp />
-          </Block>
-          <Block>
+            <br />
             <Callout
               style={{marginLeft: -4}}
               icon={<WorldIcon color="primary" />}
@@ -44,11 +43,13 @@ const Home = withTheme(({theme}) => {
                 <Box paddingX={1} paddingY={0.5}>
                   <Typography variant="body2" color="textSecondary">
                     This website is a work in progress. I'm building it in NextJS.&nbsp;
-                    <StyledLink disableBackground href="https://github.com/joaquinkunkel/personal-website">See it on GitHub</StyledLink> if curious!
+                    <StyledLink passHref disableBackground href="https://github.com/joaquinkunkel/personal-website/">GitHub repo</StyledLink>
                   </Typography>
                 </Box>
               }
             />
+          </Block>
+          <Block>
           </Block>
           
           {/* Case studies */}
@@ -99,8 +100,8 @@ const Home = withTheme(({theme}) => {
 const ValueProp = withTheme(({theme}) => {
   return (
     <Box>
-      <Typography variant="h6" color="textSecondary">
-        I believe in a culture of user empathy, artistic creativity, and contextual awareness.
+      <Typography variant="h6">
+        I believe in a culture of user empathy, high craft, and contextual awareness.
         <br />
         {/* I work for high impact and elevated craft.<br /> */}
         I'm also a&nbsp;
