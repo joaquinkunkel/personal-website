@@ -50,7 +50,6 @@ const Home = withTheme(({theme}) => {
               }
             />
           </Block>
-          <Block />
           
           {/* Case studies */}
 
