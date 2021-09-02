@@ -58,28 +58,33 @@ const ArticleHeader = withTheme(({
           <Grid item="12" md={md}>
             <Typography
               variant="body1"
-              color="textSecondary"
+              // color="textSecondary"
               gutterBottom
               >
               {subtitle}
             </Typography>
-            <Box height={8} />
-            <Typography
-              variant="body2"
-              color="textSecondary"
-              gutterBottom
-              >
-              {fields}
-            </Typography>
-            <Box height={0} />
+            {
+              fields && size === 'large' &&
+              <>
+                <Box height={12} />
+                <Typography
+                  variant="body2"
+                  color="textSecondary"
+                  gutterBottom
+                  >
+                  {fields}
+                </Typography>
+              </>
+            }
             {
               comingSoon &&
                 <>
+                  <Box height={12} />
                   <Chip
                     variant="outlined"
+                    // color="secondary"
                     label={size === 'large' ? 'Work in progress' : 'WIP'}
                     size={size}
-                    style={{marginTop: 16}}
                     />
                 </>
               }

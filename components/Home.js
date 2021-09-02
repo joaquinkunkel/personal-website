@@ -25,12 +25,30 @@ const Home = withTheme(({theme}) => {
       {/* CSS imports and meta tags go in HomeHead */}
       <NavBar fixed />
 
-        <Grid container spacing={10} style={{paddingTop: '5vh', width: '100%', margin: 0}}>
+        <Grid container spacing={10} style={{
+          paddingTop: '5vh',
+          width: '100%',
+          margin: 0}
+        }>
           <Block>
             <Hero />
           </Block>
           <Block>
             <ValueProp />
+          </Block>
+          <Block>
+            <Callout
+              style={{marginLeft: -4}}
+              icon={<WorldIcon color="primary" />}
+              content={
+                <Box paddingX={1} paddingY={0.5}>
+                  <Typography variant="body2" color="textSecondary">
+                    This website is a work in progress. I'm building it in NextJS.&nbsp;
+                    <StyledLink disableBackground href="https://github.com/joaquinkunkel/personal-website">See it on GitHub</StyledLink> if curious!
+                  </Typography>
+                </Box>
+              }
+            />
           </Block>
           <Block />
           
@@ -65,21 +83,15 @@ const Home = withTheme(({theme}) => {
             comingSoon
           />
 
-          <Block highlight>
-            <Callout
-              // style={{borderRadius: 4, background: theme.palette.action.hover, padding: 8}}
-              icon={<WorldIcon color="primary" />}
-              content={
-                <Box padding={1}>
-                  <Typography variant="body2" color="textSecondary">
-                    This website is a work in progress. I'm building it using NextJS and Material-UI.&nbsp;
-                    <StyledLink href="https://github.com/joaquinkunkel/personal-website">See it on GitHub</StyledLink> if curious!
-                  </Typography>
-                </Box>
-              }
-            />
-          </Block>
-          
+          <ArticleLink
+            title="Hiring"
+            subtitle="Curating better candidate profiles for hiring partners."
+            color="#CEEAD9"
+            imgSrc="/case_studies/Hiring.png"
+            // href="/posts/tutor-signup"
+            comingSoon
+          />
+
         </Grid>
     </>
   );

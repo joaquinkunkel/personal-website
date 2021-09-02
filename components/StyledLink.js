@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 // My little design system's styled version of next-js link.
 
-const StyledLink = withTheme(({theme, outlined, children, href, color, target}) => {
+const StyledLink = withTheme(({theme, outlined, children, href, color, target, disableBackground}) => {
   const InnerLink = styled.a`
   color: ${theme.palette[color].main};
   cursor: pointer;
@@ -13,9 +13,9 @@ const StyledLink = withTheme(({theme, outlined, children, href, color, target}) 
   border-radius: 8px;
   border: ${outlined ? `1px solid ${theme.palette.divider}` : 'none'};
   transition: 0.2s all;
-  background: ${theme.palette.action.hover};
+  background: ${!disableBackground && theme.palette.action.focus};
   &:hover {
-    background: ${theme.palette.action.focus};
+    background: ${theme.palette.action.selected};
   };
   `;
   return (
@@ -32,6 +32,7 @@ StyledLink.defaultProps = {
   href: '#',
   color: 'primary',
   outlined: false,
+  disableBackground: false,
 };
 
 export default StyledLink;

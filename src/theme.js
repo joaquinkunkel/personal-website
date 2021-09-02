@@ -39,7 +39,7 @@ const globals = {
     h6: {
       fontFamily: serif,
       fontFamily: serif,
-      fontSize: 18,
+      fontSize: 20,
       lineHeight: 2,
     },
     body1: {
@@ -47,7 +47,7 @@ const globals = {
       lineHeight: 2,
     },
     body2: {
-      lineHeight: 1.6,
+      lineHeight: 2,
       fontFamily: serif,
     },
     subtitle1: {

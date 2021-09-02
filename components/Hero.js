@@ -8,14 +8,14 @@ const Hero = withTheme(({theme}) => (
       // color="textSecondary"
     >
       Hi. I'm&nbsp;
-      <Typography variant="h6" component="span" color="textPrimary">
+      <Typography variant="inherit" component="span" color="textPrimary">
       {/* <span
         style={{color: theme.palette.secondary.main}}
       > */}
         Joaquín
       </Typography>
-      .<br />
-      I'm a product designer with an engineering background.
+      ,<br />
+      product designer with an engineering background.
     </Typography>
     {/* <span style={{color: theme.palette.text.disabled}}><br/>(Or is it the other way around?)</span> */}
   </Box>
