@@ -64,7 +64,7 @@ const Home = withTheme(({theme}) => {
             comingSoon
           />
 
-          <ArticleLink
+          {/* <ArticleLink
             title="Tutor Reviews and Feedback"
             subtitle="Gathering meaningful, actionable feedback from students"
             color="#CBE5E1"
@@ -90,7 +90,7 @@ const Home = withTheme(({theme}) => {
             imgSrc="/case_studies/Hiring.png"
             // href="/posts/tutor-signup"
             comingSoon
-          />
+          /> */}
 
         </Grid>
     </>
