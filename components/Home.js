@@ -42,7 +42,7 @@ const Home = withTheme(({theme}) => {
               content={
                 <Box paddingX={1} paddingY={0.5}>
                   <Typography variant="body2" color="textSecondary">
-                    I'm migrating from my old portfolio, which currently houses my branding and art projects pre-2020. You can see those&nbsp;
+                    I'm migrating from my old portfolio, which currently houses my branding, product, and art projects pre-2020. You can see those&nbsp;
                     <StyledLink passHref disableBackground href="http://projects.joaquinkunkel.com">here</StyledLink>.
                     <br />
                     This website is a work in progress. I'm building it in NextJS. If curious, here's the&nbsp;
