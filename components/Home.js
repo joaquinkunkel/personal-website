@@ -42,8 +42,11 @@ const Home = withTheme(({theme}) => {
               content={
                 <Box paddingX={1} paddingY={0.5}>
                   <Typography variant="body2" color="textSecondary">
-                    This website is a work in progress. I'm building it in NextJS.&nbsp;
-                    <StyledLink passHref disableBackground href="https://github.com/joaquinkunkel/personal-website/">GitHub repo</StyledLink>
+                    I'm migrating from my old portfolio, which currently houses my branding and art projects pre-2020. You can see those&nbsp;
+                    <StyledLink passHref disableBackground href="http://projects.joaquinkunkel.com">here</StyledLink>.
+                    <br />
+                    This website is a work in progress. I'm building it in NextJS. If curious, here's the&nbsp;
+                    <StyledLink passHref disableBackground href="https://github.com/joaquinkunkel/personal-website/">GitHub repo</StyledLink>.
                   </Typography>
                 </Box>
               }
@@ -101,11 +104,11 @@ const ValueProp = withTheme(({theme}) => {
   return (
     <Box>
       <Typography variant="h6">
-        I believe in a culture of user empathy, high craft, and contextual awareness.
+        I believe in a culture of user empathy, artistic expression, and contextual awareness.
         <br />
         {/* I work for high impact and elevated craft.<br /> */}
         I'm also a&nbsp;
-        <StyledLink href="/art">
+        <StyledLink disableBackground passHref href="https://www.instagram.com/ineedanalias/">
           visual artist.
         </StyledLink>
       </Typography>
